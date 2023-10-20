@@ -26,14 +26,14 @@ int main()
         }
         else if (libraryChoice == "unit")
         {
-            UnitConversion unitConversion;
-            unitConversion.performUnitConversion();
+            ConversionManager conversionManager;
+            conversionManager.performConversions();
         }
-        else if (libraryChoice == "temp")
-        {
-            TemperatureConversion temperatureConversion;
-            temperatureConversion.performTemperatureConversion();
-        }
+        // else if (libraryChoice == "temp")
+        // {
+        //     TemperatureConversion temperatureConversion;
+        //     temperatureConversion.performTemperatureConversion();
+        // }
         // else if (libraryChoice == "mat")
         // {
         //     MatrixLibrary::Matrix matrix ;
