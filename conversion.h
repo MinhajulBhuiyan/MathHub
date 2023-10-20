@@ -122,24 +122,24 @@ namespace myLib
     class SpeedConversion
     {
     public:
-        double mphToKph(double mph)
+        double mphTokmph(double mph)
         {
             return mph * 1.60934;
         }
 
-        double kphToMph(double kph)
+        double kmphToMph(double kmph)
         {
-            return kph / 1.60934;
+            return kmph / 1.60934;
         }
 
-        double mpsToKph(double mps)
+        double mpsTokmph(double mps)
         {
             return mps * 3.6;
         }
 
-        double kphToMps(double kph)
+        double kmphToMps(double kmph)
         {
-            return kph / 3.6;
+            return kmph / 3.6;
         }
     };
 
@@ -176,13 +176,13 @@ namespace myLib
 
             while (true)
             {
-                cout << "Choose a conversion type:\n";
+                cout << "\n\nChoose a conversion type:\n\n";
                 cout << "1. Length Conversion\n";
                 cout << "2. Temperature Conversion\n";
                 cout << "3. Weight Conversion\n";
                 cout << "4. Speed Conversion\n";
                 cout << "5. Pressure Conversion\n";
-                cout << "0. Exit\n";
+                cout << "0. Exit\n\n\n";
                 cout << "Enter your choice (0-5): ";
                 cin >> choice;
 
@@ -209,7 +209,7 @@ namespace myLib
                     performPressureConversions();
                     break;
                 default:
-                    cout << "Invalid choice. Please enter a valid option.\n";
+                    cout << "Invalid choice. Please enter a valid option.\n\n\n";
                     break;
                 }
             }
@@ -224,19 +224,20 @@ namespace myLib
 
             while (true)
             {
-                cout << "\nLength Conversion Menu:\n\n";
-                cout << "1. Inches to Centimeters\n";
-                cout << "2. Centimeters to Inches\n";
-                cout << "3. Feet to Meters\n";
-                cout << "4. Meters to Feet\n";
-                cout << "5. Yards to Meters\n";
-                cout << "6. Meters to Yards\n";
-                cout << "7. Miles to Kilometers\n";
-                cout << "8. Kilometers to Miles\n";
-                cout << "9. Nautical Miles to Miles\n";
-                cout << "10. Miles to Nautical Miles\n";
-                cout << "0. Back to Main Menu\n\n\n";
+                cout << "\n\nLength Conversion Menu:\n\n";
+                cout << "1. in -> cm\n";
+                cout << "2. cm -> in\n";
+                cout << "3. ft -> m\n";
+                cout << "4. m -> ft\n";
+                cout << "5. yd -> m\n";
+                cout << "6. m -> yd\n";
+                cout << "7. mile -> km\n";
+                cout << "8. km -> mile\n";
+                cout << "9. n mile -> mile\n";
+                cout << "10. mile -> n mile\n";
+                cout << "0. Back to Main Menu\n\n";
                 cout << "Enter your choice (0-10): ";
+
                 cin >> subChoice;
 
                 if (subChoice == 0)
@@ -250,48 +251,48 @@ namespace myLib
                 switch (subChoice)
                 {
                 case 1:
-                    cout << "\n\n\n\n\n\n\n\n\n"
-                         << value << " inches is equal to " << lengthConversion.inchesToCentimeters(value) << " centimeters.\n\n\n\n\n\n\n\n\n";
+                    cout << "\n\n\n"
+                         << value << " in = " << lengthConversion.inchesToCentimeters(value) << " cm.\n\n\n\n";
                     break;
                 case 2:
-                    cout << "\n\n\n\n\n\n\n\n\n"
-                         << value << " centimeters is equal to " << lengthConversion.centimetersToInches(value) << " inches.\n\n\n\n\n\n\n\n\n";
+                    cout << "\n\n\n"
+                         << value << " cm = " << lengthConversion.centimetersToInches(value) << " in.\n\n\n\n";
                     break;
                 case 3:
-                    cout << "\n\n\n\n\n\n\n\n\n"
-                         << value << " feet is equal to " << lengthConversion.feetToMeters(value) << " meters.\n\n\n\n\n\n\n\n\n";
+                    cout << "\n\n\n"
+                         << value << " ft = " << lengthConversion.feetToMeters(value) << " m.\n\n\n\n";
                     break;
                 case 4:
-                    cout << "\n\n\n\n\n\n\n\n\n"
-                         << value << " meters is equal to " << lengthConversion.metersToFeet(value) << " feet.\n\n\n\n\n\n\n\n\n";
+                    cout << "\n\n\n"
+                         << value << " m = " << lengthConversion.metersToFeet(value) << " ft.\n\n\n\n";
                     break;
                 case 5:
-                    cout << "\n\n\n\n\n\n\n\n\n"
-                         << value << " yards is equal to " << lengthConversion.yardsToMeters(value) << " meters.\n\n\n\n\n\n\n\n\n";
+                    cout << "\n\n\n"
+                         << value << " yd = " << lengthConversion.yardsToMeters(value) << " m.\n\n\n\n";
                     break;
                 case 6:
-                    cout << "\n\n\n\n\n\n\n\n\n"
-                         << value << " meters is equal to " << lengthConversion.metersToYards(value) << " yards.\n\n\n\n\n\n\n\n\n";
+                    cout << "\n\n\n"
+                         << value << " m = " << lengthConversion.metersToYards(value) << " yd.\n\n\n\n";
                     break;
                 case 7:
-                    cout << "\n\n\n\n\n\n\n\n\n"
-                         << value << " miles is equal to " << lengthConversion.milesToKilometers(value) << " kilometers.\n\n\n\n\n\n\n\n\n";
+                    cout << "\n\n\n"
+                         << value << " mile = " << lengthConversion.milesToKilometers(value) << " km.\n\n\n\n";
                     break;
                 case 8:
-                    cout << "\n\n\n\n\n\n\n\n\n"
-                         << value << " kilometers is equal to " << lengthConversion.kilometersToMiles(value) << " miles.\n\n\n\n\n\n\n\n\n";
+                    cout << "\n\n\n"
+                         << value << " km = " << lengthConversion.kilometersToMiles(value) << " mile.\n\n\n\n";
                     break;
                 case 9:
-                    cout << "\n\n\n\n\n\n\n\n\n"
-                         << value << " nautical miles is equal to " << lengthConversion.nauticalMilesToMiles(value) << " miles.\n\n\n\n\n\n\n\n\n";
+                    cout << "\n\n\n"
+                         << value << " n mile = " << lengthConversion.nauticalMilesToMiles(value) << " mile.\n\n\n\n";
                     break;
                 case 10:
-                    cout << "\n\n\n\n\n\n\n\n\n"
-                         << value << " miles is equal to " << lengthConversion.milesToNauticalMiles(value) << " nautical miles.\n\n\n\n\n\n\n\n\n";
+                    cout << "\n\n\n"
+                         << value << " mile = " << lengthConversion.milesToNauticalMiles(value) << " n mile.\n\n\n\n";
                     break;
                 default:
-                    cout << "\n\n\n\n\n\n\n\n\n"
-                         << "Invalid choice. Please enter a valid option.\n\n\n\n\n\n\n\n\n";
+                    cout << "\n\n\n"
+                         << "Invalid choice. Please enter a valid option.\n\n";
                     break;
                 }
             }
@@ -305,14 +306,14 @@ namespace myLib
 
             while (true)
             {
-                cout << "\nTemperature Conversion Menu:\n\n";
-                cout << "1. Celsius to Fahrenheit\n";
-                cout << "2. Fahrenheit to Celsius\n";
-                cout << "3. Celsius to Kelvin\n";
-                cout << "4. Kelvin to Celsius\n";
-                cout << "5. Fahrenheit to Kelvin\n";
-                cout << "6. Kelvin to Fahrenheit\n";
-                cout << "0. Back to Main Menu\n\n\n";
+                cout << "\nTemperature Conversion Menu:\n";
+                cout << "1. C -> F\n\n";
+                cout << "2. F -> C\n";
+                cout << "3. C -> K\n";
+                cout << "4. K -> C\n";
+                cout << "5. F -> K\n";
+                cout << "6. K -> F\n";
+                cout << "0. Back to Main Menu\n\n";
                 cout << "Enter your choice (0-6): ";
                 cin >> subChoice;
 
@@ -327,31 +328,32 @@ namespace myLib
                 switch (subChoice)
                 {
                 case 1:
-                    cout << "\n\n\n\n\n\n\n\n"
-                         << value << " Celsius is equal to " << tempConversion.CelsiusToFahrenheit(value) << " Fahrenheit.\n\n\n\n\n\n\n\n";
+                    cout << "\n\n\n"
+                         << value << " C = " << tempConversion.CelsiusToFahrenheit(value) << " F.\n\n\n\n";
                     break;
                 case 2:
-                    cout << "\n\n\n\n\n\n\n\n"
-                         << value << " Fahrenheit is equal to " << tempConversion.FahrenheitToCelsius(value) << " Celsius.\n\n\n\n\n\n\n\n";
+                    cout << "\n\n\n"
+                         << value << " F = " << tempConversion.FahrenheitToCelsius(value) << " C.\n\n\n\n";
                     break;
                 case 3:
-                    cout << "\n\n\n\n\n\n\n\n"
-                         << value << " Celsius is equal to " << tempConversion.CelsiusToKelvin(value) << " Kelvin.\n\n\n\n\n\n\n\n";
+                    cout << "\n\n\n"
+                         << value << " C = " << tempConversion.CelsiusToKelvin(value) << " K.\n\n\n\n";
                     break;
                 case 4:
-                    cout << "\n\n\n\n\n\n\n\n"
-                         << value << " Kelvin is equal to " << tempConversion.KelvinToCelsius(value) << " Celsius.\n\n\n\n\n\n\n\n";
+                    cout << "\n\n\n"
+                         << value << " K = " << tempConversion.KelvinToCelsius(value) << " C.\n\n\n\n";
                     break;
                 case 5:
-                    cout << "\n\n\n\n\n\n\n\n"
-                         << value << " Fahrenheit is equal to " << tempConversion.FahrenheitToKelvin(value) << " Kelvin.\n\n\n\n\n\n\n\n";
+                    cout << "\n\n\n"
+                         << value << " F = " << tempConversion.FahrenheitToKelvin(value) << " K.\n\n\n\n";
                     break;
                 case 6:
-                    cout << "\n\n\n\n\n\n\n\n"
-                         << value << " Kelvin is equal to " << tempConversion.KelvinToFahrenheit(value) << " Fahrenheit.\n\n\n\n\n\n\n\n";
+                    cout << "\n\n\n"
+                         << value << " K = " << tempConversion.KelvinToFahrenheit(value) << " F.\n\n\n\n";
                     break;
                 default:
-                    cout << "\n\n\n\n\n\n\n\nInvalid choice. Please enter a valid option.\n\n\n\n\n\n\n\n";
+                    cout << "\n\n\n"
+                         << "Invalid choice. Please enter a valid option.\n\n";
                     break;
                 }
             }
@@ -365,12 +367,12 @@ namespace myLib
 
             while (true)
             {
-                cout << "\nWeight Conversion Menu:\n";
-                cout << "1. Pounds to Kilograms\n";
-                cout << "2. Kilograms to Pounds\n";
-                cout << "3. Ounces to Grams\n";
-                cout << "4. Grams to Ounces\n";
-                cout << "0. Back to Main Menu\n";
+                cout << "\nWeight Conversion Menu:\n\n";
+                cout << "1. lb -> kg\n";
+                cout << "2. kg -> lb\n";
+                cout << "3. oz -> g\n";
+                cout << "4. g -> oz\n";
+                cout << "0. Back to Main Menu\n\n";
                 cout << "Enter your choice (0-4): ";
                 cin >> subChoice;
 
@@ -379,25 +381,30 @@ namespace myLib
                     break; // Return to the main menu
                 }
 
-                cout << "Enter the weight value to convert: ";
+                cout << "\n\nEnter the weight value to convert: ";
                 cin >> value;
 
                 switch (subChoice)
                 {
                 case 1:
-                    cout << value << " pounds is equal to " << weightConversion.poundsToKilograms(value) << " kilograms.\n";
+                    cout << "\n\n\n"
+                         << value << " lb = " << weightConversion.poundsToKilograms(value) << " kg.\n\n\n";
                     break;
                 case 2:
-                    cout << value << " kilograms is equal to " << weightConversion.kilogramsToPounds(value) << " pounds.\n";
+                    cout << "\n\n\n"
+                         << value << " kg = " << weightConversion.kilogramsToPounds(value) << " lb.\n\n\n";
                     break;
                 case 3:
-                    cout << value << " ounces is equal to " << weightConversion.ouncesToGrams(value) << " grams.\n";
+                    cout << "\n\n\n"
+                         << value << " oz = " << weightConversion.ouncesToGrams(value) << " g.\n\n\n";
                     break;
                 case 4:
-                    cout << value << " grams is equal to " << weightConversion.gramsToOunces(value) << " ounces.\n";
+                    cout << "\n\n\n"
+                         << value << " g = " << weightConversion.gramsToOunces(value) << " oz.\n\n\n";
                     break;
                 default:
-                    cout << "Invalid choice. Please enter a valid option.\n";
+                    cout << "\n\n\n"
+                         << "Invalid choice. Please enter a valid option.\n\n";
                     break;
                 }
             }
@@ -411,12 +418,12 @@ namespace myLib
 
             while (true)
             {
-                cout << "\nSpeed Conversion Menu:\n";
-                cout << "1. Miles per Hour to Kilometers per Hour\n";
-                cout << "2. Kilometers per Hour to Miles per Hour\n";
-                cout << "3. Meters per Second to Kilometers per Hour\n";
-                cout << "4. Kilometers per Hour to Meters per Second\n";
-                cout << "0. Back to Main Menu\n";
+                cout << "\nSpeed Conversion Menu:\n\n";
+                cout << "1. mph -> kmph\n";
+                cout << "2. kmph -> mph\n";
+                cout << "3. m/s -> kmph\n";
+                cout << "4. kmph -> m/s\n";
+                cout << "0. Back to Main Menu\n\n";
                 cout << "Enter your choice (0-4): ";
                 cin >> subChoice;
 
@@ -425,25 +432,30 @@ namespace myLib
                     break; // Return to the main menu
                 }
 
-                cout << "Enter the speed value to convert: ";
+                cout << "\n\nEnter the speed value to convert: ";
                 cin >> value;
 
                 switch (subChoice)
                 {
                 case 1:
-                    cout << value << " miles per hour is equal to " << speedConversion.mphToKph(value) << " kilometers per hour.\n";
+                    cout << "\n\n\n"
+                         << value << " mph = " << speedConversion.mphTokmph(value) << " kmph.\n\n\n";
                     break;
                 case 2:
-                    cout << value << " kilometers per hour is equal to " << speedConversion.kphToMph(value) << " miles per hour.\n";
+                    cout << "\n\n\n"
+                         << value << " kmph = " << speedConversion.kmphToMph(value) << " mph.\n\n\n";
                     break;
                 case 3:
-                    cout << value << " meters per second is equal to " << speedConversion.mpsToKph(value) << " kilometers per hour.\n";
+                    cout << "\n\n\n"
+                         << value << " m/s = " << speedConversion.mpsTokmph(value) << " kmph.\n\n\n";
                     break;
                 case 4:
-                    cout << value << " kilometers per hour is equal to " << speedConversion.kphToMps(value) << " meters per second.\n";
+                    cout << "\n\n\n"
+                         << value << " kmph = " << speedConversion.kmphToMps(value) << " m/s.\n\n\n";
                     break;
                 default:
-                    cout << "Invalid choice. Please enter a valid option.\n";
+                    cout << "\n\n\n"
+                         << "Invalid choice. Please enter a valid option.\n\n";
                     break;
                 }
             }
@@ -457,12 +469,12 @@ namespace myLib
 
             while (true)
             {
-                cout << "\nPressure Conversion Menu:\n";
-                cout << "1. Pascals to Atmospheres\n";
-                cout << "2. Atmospheres to Pascals\n";
-                cout << "3. Millimeters of Mercury to Pascals\n";
-                cout << "4. Pascals to Millimeters of Mercury\n";
-                cout << "0. Back to Main Menu\n";
+                cout << "\nPressure Conversion Menu:\n\n";
+                cout << "1. Pa -> atm\n";
+                cout << "2. atm -> Pa\n";
+                cout << "3. mmHg -> Pa\n";
+                cout << "4. Pa -> mmHg\n";
+                cout << "0. Back to Main Menu\n\n";
                 cout << "Enter your choice (0-4): ";
                 cin >> subChoice;
 
@@ -471,25 +483,30 @@ namespace myLib
                     break; // Return to the main menu
                 }
 
-                cout << "Enter the pressure value to convert: ";
+                cout << "\n\nEnter the pressure value to convert: ";
                 cin >> value;
 
                 switch (subChoice)
                 {
                 case 1:
-                    cout << value << " pascals is equal to " << pressureConversion.paToAtm(value) << " atmospheres.\n";
+                    cout << "\n\n\n"
+                         << value << " Pa = " << pressureConversion.paToAtm(value) << " atm.\n\n\n";
                     break;
                 case 2:
-                    cout << value << " atmospheres is equal to " << pressureConversion.atmToPa(value) << " pascals.\n";
+                    cout << "\n\n\n"
+                         << value << " atm = " << pressureConversion.atmToPa(value) << " Pa.\n\n\n";
                     break;
                 case 3:
-                    cout << value << " millimeters of mercury is equal to " << pressureConversion.mmHgToPa(value) << " pascals.\n";
+                    cout << "\n\n\n"
+                         << value << " mmHg = " << pressureConversion.mmHgToPa(value) << " Pa.\n\n\n";
                     break;
                 case 4:
-                    cout << value << " pascals is equal to " << pressureConversion.paToMmHg(value) << " millimeters of mercury.\n";
+                    cout << "\n\n\n"
+                         << value << " Pa = " << pressureConversion.paToMmHg(value) << " mmHg.\n\n\n";
                     break;
                 default:
-                    cout << "Invalid choice. Please enter a valid option.\n";
+                    cout << "\n\n\n"
+                         << "Invalid choice. Please enter a valid option.\n\n";
                     break;
                 }
             }
