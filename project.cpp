@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Conversion.h"
 #include "Trigonometry.h"
-// #include "matrixManipulation.h"
+#include "matrixManipulation.h"
 
 using namespace std;
 using namespace myLib; // Assuming you have both Conversion and Trigonometry namespaces in separate headers
@@ -34,11 +34,11 @@ int main()
         //     TemperatureConversion temperatureConversion;
         //     temperatureConversion.performTemperatureConversion();
         // }
-        // else if (libraryChoice == "mat")
-        // {
-        //     MatrixLibrary::Matrix matrix ;
-        //     matrix.chooseMatrixOperation();
-        // }
+        else if (libraryChoice == "mat")
+        {
+            MatrixLibrary::MatrixManager matrix ;
+            matrix.chooseMatrixOperation();
+        }
         else
         {
             cout << "Invalid library choice. Please enter 'tri,' 'unit,' 'temp,' 'mat' or 'exit'." << endl;
