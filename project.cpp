@@ -4,7 +4,7 @@
 #include "matrixManipulation.h"
 
 using namespace std;
-using namespace unit; 
+using namespace unit;
 using namespace trigonometry;
 using namespace MatrixLibrary;
 
@@ -15,35 +15,36 @@ int main()
     while (true)
     {
 
-        cout << "Choose a library ('Trigonometry,' 'Unit conversion,' 'Temperature,' 'Matrix Manipulation' or 'Exit' to Quit): ";
+        cout << "Choose a library\n\n1. Trigonometry\n2. Unit conversion\n3. Matrix Manipulation\n0. Exit\n";
+        cout << "\nPlease enter [ 1/2/3/0 ]: ";
         getline(cin, libraryChoice);
 
-        if (libraryChoice == "exit")
+        if (libraryChoice == "0")
         {
             break;
         }
-        
-        else if (libraryChoice == "tri")
+
+        else if (libraryChoice == "1")
         {
             Trigonometry trigonometry;
             trigonometry.performTrigonometry();
         }
 
-        else if (libraryChoice == "unit")
+        else if (libraryChoice == "2")
         {
             ConversionManager conversionManager;
             conversionManager.performConversions();
         }
 
-        else if (libraryChoice == "mat")
+        else if (libraryChoice == "3")
         {
-            MatrixManager matrix ;
+            MatrixManager matrix;
             matrix.chooseMatrixOperation();
         }
 
         else
         {
-            cout << "Invalid library choice. Please enter 'tri,' 'unit,' 'temp,' 'mat' or 'exit'." << endl;
+            cout << "Invalid library choice. Please enter [ 1/2/3/0 ]" << endl;
         }
     }
 

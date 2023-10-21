@@ -3,12 +3,12 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
+#include <cmath>
 
 using namespace std;
 
 namespace MatrixLibrary
 {
-
     // Function to print a matrix in the specified format
     void printMatrix(const vector<vector<double>> &matrix, const string &matrixName)
     {
@@ -17,7 +17,7 @@ namespace MatrixLibrary
         {
             for (double val : row)
             {
-                cout << setw(7) << fixed << setprecision(1) << val;
+                cout << setw(8) << fixed << setprecision(2) << val;
             }
             cout << endl;
         }
@@ -65,6 +65,34 @@ namespace MatrixLibrary
                 for (int j = 0; j < cols; ++j)
                 {
                     result[i][j] = matrixA[i][j] - matrixB[i][j];
+                }
+            }
+
+            return result;
+        }
+
+        static vector<vector<double>> matrixMultiplication(const vector<vector<double>> &matrixA, const vector<vector<double>> &matrixB)
+        {
+            int rowsA = matrixA.size();
+            int colsA = matrixA[0].size();
+            int colsB = matrixB[0].size();
+
+            if (colsA != matrixB.size())
+            {
+                cerr << "Matrix dimensions are not compatible for multiplication." << endl;
+                exit(1);
+            }
+
+            vector<vector<double>> result(rowsA, vector<double>(colsB, 0.0));
+
+            for (int i = 0; i < rowsA; ++i)
+            {
+                for (int j = 0; j < colsB; ++j)
+                {
+                    for (int k = 0; k < colsA; ++k)
+                    {
+                        result[i][j] += matrixA[i][k] * matrixB[k][j];
+                    }
                 }
             }
 
@@ -121,13 +149,32 @@ namespace MatrixLibrary
                 result[2][1] = (matrix[0][1] * matrix[2][0] - matrix[0][0] * matrix[2][1]) * invDet;
                 result[2][2] = (matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]) * invDet;
             }
-            else
-            {
-                cerr << "Matrix dimensions are not supported for inversion." << endl;
-                return {}; // Return an empty matrix to indicate an error.
-            }
 
             return result;
+        }
+
+        static double calculateDeterminant(const vector<vector<double>> &matrix)
+        {
+            int rows = matrix.size();
+            int cols = matrix[0].size();
+
+            if (rows != cols)
+            {
+                cerr << "Determinant can only be calculated for square matrices." << endl;
+                return NAN; // Return NaN to indicate an error.
+            }
+
+            if (rows == 2 && cols == 2)
+            {
+                return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+            }
+            else if (rows == 3 && cols == 3)
+            {
+                return matrix[0][0] * (matrix[1][1] * matrix[2][2] - matrix[1][2] * matrix[2][1]) - matrix[0][1] * (matrix[1][0] * matrix[2][2] - matrix[1][2] * matrix[2][0]) + matrix[0][2] * (matrix[1][0] * matrix[2][1] - matrix[1][1] * matrix[2][0]);
+            }
+
+            cerr << "Determinant can only be calculated for 2x2 or 3x3 matrices." << endl;
+            return NAN; // Return NaN to indicate an error.
         }
     };
 
@@ -150,6 +197,7 @@ namespace MatrixLibrary
                 matrix[i][j] = val;
             }
         }
+        cout<<endl;
 
         return matrix;
     }
@@ -161,14 +209,15 @@ namespace MatrixLibrary
         {
             while (true)
             {
-
                 int operationChoice;
-                cout << "\n\nChoose a matrix operation:\n\n" << endl;
+                cout << "\n\nChoose a matrix operation:\n\n"<< endl;
                 cout << "1. Matrix Addition" << endl;
                 cout << "2. Matrix Subtraction" << endl;
-                cout << "3. Matrix Inversion (2x2 or 3x3 only)" << endl;
+                cout << "3. Matrix Multiplication" << endl;
+                cout << "4. Matrix Inversion" << endl;
+                cout << "5. Calculate Determinant" << endl;
                 cout << "0. Exit\n\n\n";
-                cout << "Enter your choice (0/1/2/3): ";
+                cout << "Enter your choice (0/1/2/3/4/5): ";
                 cin >> operationChoice;
 
                 if (operationChoice == 0)
@@ -176,58 +225,85 @@ namespace MatrixLibrary
                     break; // Exit the program
                 }
 
-                if (operationChoice != 1 && operationChoice != 2 && operationChoice != 3)
+                if (operationChoice < 1 || operationChoice > 5)
                 {
-                    cerr << "\n\nInvalid choice for the matrix operation. Please enter 1, 2, or 3.\n" << endl;
+                    cerr << "\n\nInvalid choice for the matrix operation. Please enter 1, 2, 3, 4, or 5.\n"
+                         << endl;
                     return;
                 }
 
                 int dimension;
-                cout << "\n\nChoose the matrix dimension (2 for 2x2, 3 for 3x3): ";
+                cout << "\nChoose the matrix dimension (2 for 2x2, 3 for 3x3): ";
                 cin >> dimension;
 
                 if (dimension < 2 || dimension > 3)
                 {
-                    cerr << "\nInvalid matrix dimension. Please enter 2 for 2x2 or 3 for 3x3." << endl;
+                    cerr << "Invalid matrix dimension. Please enter 2 for 2x2 or 3 for 3x3." << endl;
                     return;
                 }
 
                 cin.ignore(); // Consume the newline character after entering dimension.
 
-                if (operationChoice == 3)
+                vector<vector<double>> matrixA = inputMatrix(dimension, "Matrix A");
+
+                switch (operationChoice)
                 {
-                    // Matrix inversion
-                    vector<vector<double>> matrix = inputMatrix(dimension, "Matrix");
-                    vector<vector<double>> resultInversion = MatrixLibrary::MatrixOperations::matrixInversion(matrix);
+                case 1:
+                {
+                    vector<vector<double>> matrixB = inputMatrix(dimension, "Matrix B");
+                    vector<vector<double>> resultAddition = MatrixLibrary::MatrixOperations::matrixAddition(matrixA, matrixB);
+                    printMatrix(resultAddition, "\n\n\nMatrix A + Matrix B");
+                    break;
+                }
+                case 2:
+                {
+                    vector<vector<double>> matrixB = inputMatrix(dimension, "Matrix B");
+                    vector<vector<double>> resultSubtraction = MatrixLibrary::MatrixOperations::matrixSubtraction(matrixA, matrixB);
+                    printMatrix(resultSubtraction, "\n\n\nMatrix A - Matrix B");
+                    break;
+                }
+                case 3:
+                {
+                    int dimensionB;
+                    cout << "Choose the dimension of Matrix B (2 for 2x2, 3 for 3x3): ";
+                    cin >> dimensionB;
+                    if (dimensionB < 2 || dimensionB > 3)
+                    {
+                        cerr << "Invalid matrix dimension for Matrix B. Please enter 2 for 2x2 or 3 for 3x3." << endl;
+                        return;
+                    }
+                    cin.ignore();
+                    vector<vector<double>> matrixB = inputMatrix(dimensionB, "Matrix B");
+                    if (dimension != dimensionB)
+                    {
+                        cerr << "Matrix dimensions are not compatible for multiplication." << endl;
+                        return;
+                    }
+                    vector<vector<double>> resultMultiplication = MatrixLibrary::MatrixOperations::matrixMultiplication(matrixA, matrixB);
+                    printMatrix(resultMultiplication, "\n\n\nMatrix A * Matrix B");
+                    break;
+                }
+                case 4:
+                {
+                    vector<vector<double>> resultInversion = MatrixLibrary::MatrixOperations::matrixInversion(matrixA);
                     if (!resultInversion.empty())
                     {
-                        printMatrix(resultInversion, "Inverse of Matrix");
+                        printMatrix(resultInversion, "Inverse of Matrix A");
                     }
+                    break;
                 }
-                else
+                case 5:
                 {
-                    // Matrix addition or subtraction
-                    vector<vector<double>> matrixA = inputMatrix(dimension, "Matrix A");
-                    vector<vector<double>> matrixB = inputMatrix(dimension, "Matrix B");
-
-                    switch (operationChoice)
+                    double determinant = MatrixLibrary::MatrixOperations::calculateDeterminant(matrixA);
+                    if (!isnan(determinant))
                     {
-                    case 1:
-                    {
-                        vector<vector<double>> resultAddition = MatrixLibrary::MatrixOperations::matrixAddition(matrixA, matrixB);
-                        printMatrix(resultAddition, "\n\n\nMatrix A + Matrix B");
-                        break;
+                        cout << "\nDeterminant of Matrix A: " << determinant << endl;
                     }
-                    case 2:
-                    {
-                        vector<vector<double>> resultSubtraction = MatrixLibrary::MatrixOperations::matrixSubtraction(matrixA, matrixB);
-                        printMatrix(resultSubtraction, "\n\n\nMatrix A - Matrix B");
-                        break;
-                    }
-                    default:
-                        cout << "\n\nInvalid choice. Please enter a valid option.\n\n";
-                        break;
-                    }
+                    break;
+                }
+                default:
+                    cout << "\nInvalid choice. Please enter a valid option.\n\n";
+                    break;
                 }
             }
         }
