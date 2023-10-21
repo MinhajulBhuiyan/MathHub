@@ -3,7 +3,7 @@
 #include <iostream>
 
 using namespace std;
-namespace myLib
+namespace unit
 {
     class LengthConversion
     {
@@ -218,7 +218,7 @@ namespace myLib
     private:
         void performLengthConversions()
         {
-            myLib::LengthConversion lengthConversion;
+            unit::LengthConversion lengthConversion;
             int subChoice;
             double value;
 
@@ -300,7 +300,7 @@ namespace myLib
 
         void performTemperatureConversions()
         {
-            myLib::TemperatureConversion tempConversion;
+            unit::TemperatureConversion tempConversion;
             int subChoice;
             double value;
 
@@ -361,7 +361,7 @@ namespace myLib
 
         void performWeightConversions()
         {
-            myLib::WeightConversion weightConversion;
+            unit::WeightConversion weightConversion;
             int subChoice;
             double value;
 
@@ -412,7 +412,7 @@ namespace myLib
 
         void performSpeedConversions()
         {
-            myLib::SpeedConversion speedConversion;
+            unit::SpeedConversion speedConversion;
             int subChoice;
             double value;
 
@@ -463,7 +463,7 @@ namespace myLib
 
         void performPressureConversions()
         {
-            myLib::PressureConversion pressureConversion;
+            unit::PressureConversion pressureConversion;
             int subChoice;
             double value;
 

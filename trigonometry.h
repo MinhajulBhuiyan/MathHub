@@ -6,9 +6,7 @@
 
 using namespace std;
 
-
-
-namespace myLib2
+namespace trigonometry
 {
     const double PI = 3.14159265358979323846;
     const int ANGLE_MULTIPLIER = 1000; // Adjust this for desired precision
