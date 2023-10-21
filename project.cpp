@@ -2,11 +2,13 @@
 #include "Conversion.h"
 #include "Trigonometry.h"
 #include "matrixManipulation.h"
+#include "quantitative.h"
 
 using namespace std;
 using namespace unit;
 using namespace trigonometry;
 using namespace MatrixLibrary;
+using namespace quantitative;
 
 int main()
 {
@@ -15,8 +17,8 @@ int main()
     while (true)
     {
 
-        cout << "Choose a library\n\n1. Trigonometry\n2. Unit conversion\n3. Matrix Manipulation\n0. Exit\n";
-        cout << "\nPlease enter [ 1/2/3/0 ]: ";
+        cout << "Choose a library\n\n1. Trigonometry\n2. Unit conversion\n3. Matrix Manipulation\n4. Quantative Operation\n0. Exit\n";
+        cout << "\nPlease enter [ 1/2/3/4/0 ]: ";
         getline(cin, libraryChoice);
 
         if (libraryChoice == "0")
@@ -42,9 +44,15 @@ int main()
             matrix.chooseMatrixOperation();
         }
 
+        else if (libraryChoice == "4")
+        {
+            QuantitativeManager quantitativeop;
+            quantitativeop.performQuantitative();
+        }
+
         else
         {
-            cout << "Invalid library choice. Please enter [ 1/2/3/0 ]" << endl;
+            cout << "Invalid library choice. Please enter [ 1/2/3/4/0 ]" << endl;
         }
     }
 
