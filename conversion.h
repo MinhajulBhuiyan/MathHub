@@ -45,6 +45,7 @@ namespace unit
 
     class LengthConversion
     {
+        
     public:
         LengthConversion(double value, LengthUnit sourceUnit, LengthUnit targetUnit)
         {

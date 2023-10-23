@@ -3,12 +3,14 @@
 #include "Trigonometry.h"
 #include "matrixManipulation.h"
 #include "quantitative.h"
+#include "Logarithm.h"
 
 using namespace std;
 using namespace unit;
 using namespace trigonometry;
 using namespace MatrixLibrary;
 using namespace quantitative;
+using namespace logarithm;
 
 int main()
 {
@@ -17,7 +19,7 @@ int main()
     while (true)
     {
 
-        cout << "Choose a library\n\n1. Trigonometry\n2. Unit conversion\n3. Matrix Manipulation\n4. Quantitative Operation\n0. Exit\n";
+        cout << "Choose a library\n\n1. Trigonometry\n2. Unit conversion\n3. Matrix Manipulation\n4. Quantitative Operation\n5. Logarithmic Functions\n0. Exit\n";
         cout << "\nPlease enter [ 1/2/3/4/0 ]: ";
         getline(cin, libraryChoice);
 
@@ -48,6 +50,11 @@ int main()
         {
             QuantitativeManager quantitativeManager;
             quantitativeManager.performQuantitative();
+        }
+        else if (libraryChoice == "5")
+        {
+            Logarithm logarithm;
+            logarithm.performLogarithms();
         }
 
         else
