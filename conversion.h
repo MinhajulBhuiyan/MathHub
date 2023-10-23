@@ -45,7 +45,7 @@ namespace unit
 
     class LengthConversion
     {
-        
+
     public:
         LengthConversion(double value, LengthUnit sourceUnit, LengthUnit targetUnit)
         {
@@ -327,8 +327,6 @@ namespace unit
 
             cout << "\n\n------------------------------------------------------------------------------------------------------------------------\n\n";
         }
-
-        
 
         void performTemperatureConversions()
         {

@@ -197,7 +197,7 @@ namespace MatrixLibrary
                 matrix[i][j] = val;
             }
         }
-        cout<<endl;
+        cout << endl;
 
         return matrix;
     }
@@ -210,7 +210,8 @@ namespace MatrixLibrary
             while (true)
             {
                 int operationChoice;
-                cout << "\n\nChoose a matrix operation:\n\n"<< endl;
+                cout << "\n\nChoose a matrix operation:\n\n"
+                     << endl;
                 cout << "1. Matrix Addition" << endl;
                 cout << "2. Matrix Subtraction" << endl;
                 cout << "3. Matrix Multiplication" << endl;
