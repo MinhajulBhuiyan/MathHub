@@ -1,8 +1,8 @@
 #ifndef TRIGONOMETRY_H_
 #define TRIGONOMETRY_H_
 #include <iostream>
-#include <cmath>
-#include <iomanip>
+
+
 
 using namespace std;
 

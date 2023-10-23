@@ -7,6 +7,7 @@ namespace unit
 {
     class LengthConversion
     {
+        
     public:
         double inchesToCentimeters(double inches)
         {
