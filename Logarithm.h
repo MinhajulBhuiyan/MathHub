@@ -28,7 +28,7 @@ namespace logarithm
             double numerator = term;
             int n = 1;
 
-            while (std::abs(numerator) > 1e-15)
+            while (abs(numerator) > 1e-15)
             {
                 result += numerator / n;
                 numerator *= term_squared;
@@ -46,7 +46,7 @@ namespace logarithm
             double factorial = 1.0;
             int n = 1;
 
-            while (std::abs(term) > 1e-15)
+            while (abs(term) > 1e-15)
             {
                 term *= x / n;
                 result += term;
@@ -60,15 +60,18 @@ namespace logarithm
         {
             while (true)
             {
+                #ifdef _WIN32
+                   system("cls");
+                #endif
                 int choice;
                 double value;
 
-                std::cout << "\nChoose mathematical function:\n";
-                std::cout << "1. Natural Logarithm (ln)\n";
-                std::cout << "2. Exponential Function (e^x)\n";
-                std::cout << "0. Back to the previous menu\n";
-                std::cout << "Enter your choice (0/1/2): ";
-                std::cin >> choice;
+                cout << "Choose Logarithmic function:\n\n";
+                cout << "1. Natural Logarithm (ln)\n";
+                cout << "2. Exponential Function (e^x)\n";
+                cout << "0. Back to the previous menu\n\n";
+                cout << "Enter your choice (0/1/2): ";
+                cin >> choice;
 
                 if (choice == 0)
                 {
@@ -76,35 +79,40 @@ namespace logarithm
                 }
                 else if (choice >= 1 && choice <= 2)
                 {
-                    std::cout << "Enter the value: ";
-                    std::cin >> value;
+                    cout << "\nEnter the value: ";
+                    cin >> value;
 
                     switch (choice)
                     {
                     case 1:
                     {
                         double result = customNaturalLog(value);
-                        if (std::isnan(result))
+                        if (isnan(result))
                         {
-                            std::cout << "Custom Natural logarithm is undefined for x <= 0." << std::endl;
+                            cout << "Custom Natural logarithm is undefined for x <= 0." << endl;
                         }
                         else
                         {
-                            std::cout << "ln(" << value << ") = " << result << std::endl;
+                            cout << "\n---------------------------------------------\nln(" << value << ") = " << result <<"\n---------------------------------------------" << endl;
                         }
                         break;
                     }
                     case 2:
                     {
                         double result = customExpFunction(value);
-                        std::cout << "e^" << value << " = " << result << std::endl;
+                        cout << "\n---------------------------------------------\ne^" << value << " = " << result <<"\n---------------------------------------------" << endl;
                         break;
                     }
                     }
+
+                    // Wait for the user to press Enter before proceeding
+                    cout << "\nPress Enter to continue...";
+                    cin.ignore(); // Consume the newline character
+                    cin.get();    // This line will wait for the user to press Enter
                 }
                 else
                 {
-                    std::cout << "\nInvalid choice for the mathematical function. Please enter 0, 1, or 2.\n";
+                    cout << "\nInvalid choice for the mathematical function. Please enter 0, 1, or 2.\n";
                 }
             }
         }
