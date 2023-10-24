@@ -56,7 +56,7 @@ namespace trigonometry
 
             if (cosine < 1e-10 && cosine > -1e-10)
             {
-                cerr << "Error: tan(" << degrees << ") is undefined (division by zero)." << endl;
+                cout << "\nError: tan(" << degrees << ") is undefined (division by zero)." << endl;
                 return 1.0 / 0.0; // Return positive infinity for undefined values
             }
 
@@ -68,7 +68,7 @@ namespace trigonometry
         {
             if (value < -1.0 || value > 1.0)
             {
-                cerr << "Error: asin(" << value << ") is undefined (out of range)." << endl;
+                cout << "\nError: asin(" << value << ") is undefined (out of range)." << endl;
                 return NAN; // Return NaN for undefined values
             }
             else if (value == -1.0)
@@ -102,7 +102,7 @@ namespace trigonometry
         {
             if (value < -1.0 || value > 1.0)
             {
-                cerr << "Error: arccos(" << value << ") is undefined (out of range)." << endl;
+                cout << "\nError: arccos(" << value << ") is undefined (out of range)." << endl;
                 return NAN; // Return NaN for undefined values
             }
             else if (value == -1.0)
@@ -141,19 +141,22 @@ namespace trigonometry
         {
             while (true)
             {
+#ifdef _WIN32
+                system("cls");
+#endif
                 int choice;
                 double angle;
 
-                std::cout << "\nChoose trigonometric function:\n";
-                std::cout << "1. Sine\n";
-                std::cout << "2. Cosine\n";
-                std::cout << "3. Tangent\n";
-                std::cout << "4. Arcsine\n";
-                std::cout << "5. Arccosine\n";
-                std::cout << "6. Arctan\n";
-                std::cout << "0. Back to the previous menu\n";
-                std::cout << "Enter your choice (0/1/2/3/4/5/6): ";
-                std::cin >> choice;
+                cout << "Choose Trigonometric Function:\n\n";
+                cout << "1. Sine\n";
+                cout << "2. Cosine\n";
+                cout << "3. Tangent\n";
+                cout << "4. Arcsine\n";
+                cout << "5. Arccosine\n";
+                cout << "6. Arctan\n";
+                cout << "0. Back to the previous menu\n\n";
+                cout << "Enter your choice (0/1/2/3/4/5/6): ";
+                cin >> choice;
 
                 if (choice == 0)
                 {
@@ -161,78 +164,82 @@ namespace trigonometry
                 }
                 else if (choice >= 1 && choice <= 6)
                 {
-                    std::cout << "Enter the angle or value: ";
-                    std::cin >> angle;
+                    cout << "\nEnter the angle or value: ";
+                    cin >> angle;
 
                     switch (choice)
                     {
                     case 1:
                     {
                         double result = sinDegrees(angle);
-                        if (std::abs(result) < 1e-15)
+                        if (abs(result) < 1e-15)
                         {
                             result = 0.0;
                         }
-                        std::cout << "Sine(" << angle << ") = " << std::fixed << result << std::endl;
+                        cout << "\n---------------------------------------------\nSine(" << angle << ") = " << fixed << result <<"\n---------------------------------------------" <<endl;
                         break;
                     }
                     case 2:
                     {
                         double result = cosDegrees(angle);
-                        if (std::abs(result) < 1e-15)
+                        if (abs(result) < 1e-15)
                         {
                             result = 0.0;
                         }
-                        std::cout << "Cosine(" << angle << ") = " << std::fixed << result << std::endl;
+                        cout << "\n---------------------------------------------\nCosine(" << angle << ") = " << fixed << result <<"\n---------------------------------------------" << endl;
                         break;
                     }
                     case 3:
                     {
                         double result = tanDegrees(angle);
-                        if (std::abs(result) < 1e-15)
+                        if (abs(result) < 1e-15)
                         {
                             result = 0.0;
                         }
-                        std::cout << "Tangent(" << angle << ") = " << std::fixed << result << std::endl;
+                        cout << "\n---------------------------------------------\nTangent(" << angle << ") = " << fixed << result <<"\n---------------------------------------------" << endl;
                         break;
                     }
                     case 4:
                     {
                         double result = asinNormal(angle);
-                        if (std::isnan(result))
+                        if (isnan(result))
                         {
-                            std::cout << "arcsin(" << angle << ") is undefined (out of range)." << endl;
+                            cout << "\narcsin(" << angle << ") is undefined (out of range)." << endl;
                         }
                         else
                         {
-                            std::cout << "arcsin(" << angle << ") = " << std::fixed << result << " degrees" << std::endl;
+                            cout << "\n---------------------------------------------\nArcSin(" << angle << ") = " << fixed << result << " degrees" <<"\n---------------------------------------------" << endl;
                         }
                         break;
                     }
                     case 5:
                     {
                         double result = acosNormal(angle);
-                        if (std::isnan(result))
+                        if (isnan(result))
                         {
-                            std::cout << "arccos(" << angle << ") is undefined (out of range)." << endl;
+                            cout << "\narccos(" << angle << ") is undefined (out of range)." << endl;
                         }
                         else
                         {
-                            std::cout << "arccos(" << angle << ") = " << std::fixed << result << " degrees" << std::endl;
+                            cout << "\n---------------------------------------------\nArcCos(" << angle << ") = " << fixed << result << " degrees" <<"\n---------------------------------------------" << endl;
                         }
                         break;
                     }
                     case 6:
                     {
                         double result = atanNormal(angle);
-                        std::cout << "arctan(" << angle << ") = " << std::fixed << result << " degrees" << std::endl;
+                        cout << "\n---------------------------------------------\nArcTan(" << angle << ") = " << fixed << result << " degrees" <<"\n---------------------------------------------" << endl;
                         break;
                     }
                     }
+
+                    cout << "\nPress Enter to continue...";
+                    cin.get(); // This line will read the Enter keypress
+                    cin.get(); // This line will wait for an additional Enter keypress
                 }
                 else
                 {
-                    std::cout << "\nInvalid choice for the trigonometric function. Please enter 0, 1, 2, 3, 4, 5, or 6.\n";
+                    cout << "\nInvalid choice for the trigonometric function. Please Enter (0/1/2/3/4/5/6).\n";
                 }
             }
         }
