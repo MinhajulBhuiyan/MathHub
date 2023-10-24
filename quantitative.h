@@ -208,12 +208,16 @@ namespace quantitative
 
             while (true)
             {
-                cout << "\n\nChoose a Shape:\n\n";
+                #ifdef _WIN32
+                    system("cls");
+                #endif
+               
+                cout << "Choose a Shape:\n\n";
                 cout << "1. Triangle\n";
                 cout << "2. Quadrilateral\n";
                 cout << "3. Circle\n";
-                cout << "0. Exit\n\n\n";
-                cout << "Enter your choice (0-3): ";
+                cout << "0. Back to the previous menu\n\n";
+                cout << "Enter your choice (0/1/2/3): ";
                 cin >> choice;
 
                 if (choice == 0)
@@ -233,6 +237,10 @@ namespace quantitative
                     cout << "Invalid choice. Please enter a valid option.\n\n\n";
                     break;
                 }
+
+                cout << "Press Enter to continue...";
+                cin.get(); // This line will read the Enter keypress
+                cin.get(); // This line will wait for an additional Enter keypress
             }
         }
 
@@ -255,7 +263,7 @@ namespace quantitative
                 Triangle triangle(side1, side2, side3);
 
                 // Calculate and display the properties of the triangle
-                cout << "\n\nTriangle Properties:\n";
+                cout << "\n\nTriangle Properties:\n------------------------------------------------------------\n";
                 cout << "Area: " << triangle.calculateArea() << endl;
                 cout << "Perimeter: " << triangle.calculatePerimeter() << endl
                      << endl;

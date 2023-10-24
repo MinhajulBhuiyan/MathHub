@@ -18,6 +18,9 @@ int main()
 
     while (true)
     {
+         #ifdef _WIN32
+            system("cls");
+        #endif
 
         cout << "Choose a library\n\n1. Trigonometry\n2. Unit conversion\n3. Matrix Manipulation\n4. Quantitative Operation\n5. Logarithmic Functions\n0. Exit\n";
         cout << "\nPlease enter [ 1/2/3/4/0 ]: ";
@@ -43,7 +46,7 @@ int main()
         else if (libraryChoice == "3")
         {
             MatrixManager matrix;
-            matrix.chooseMatrixOperation();
+            matrix.performMatrixOperation();
         }
 
         else if (libraryChoice == "4")
@@ -61,6 +64,7 @@ int main()
         {
             cout << "Invalid library choice. Please enter [ 1/2/3/4/0 ]" << endl;
         }
+        
     }
 
     return 0;

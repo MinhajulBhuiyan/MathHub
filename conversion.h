@@ -86,7 +86,7 @@ namespace unit
                 result = valueInMeters / nauticalMileToMeter;
                 break;
             default:
-                cerr << "Unsupported target unit." << endl;
+                cerr << "\nUnsupported target unit." << endl;
             }
 
             return result;
@@ -249,14 +249,18 @@ namespace unit
 
             while (true)
             {
-                cout << "\n\nChoose a conversion type:\n\n";
+#ifdef _WIN32
+                system("cls");
+#endif
+
+                cout << "Choose a conversion type:\n\n";
                 cout << "1. Length Conversion\n";
                 cout << "2. Temperature Conversion\n";
                 cout << "3. Weight Conversion\n";
                 cout << "4. Speed Conversion\n";
                 cout << "5. Pressure Conversion\n";
-                cout << "0. Exit\n\n\n";
-                cout << "Enter your choice (0-5): ";
+                cout << "0. Back to previous menu\n\n";
+                cout << "Enter your choice (0/1/2/3/4/5): ";
                 cin >> choice;
 
                 if (choice == 0)
@@ -282,33 +286,45 @@ namespace unit
                     performPressureConversions();
                     break;
                 default:
-                    cout << "Invalid choice. Please enter a valid option.\n\n\n";
+                    cout << "\nInvalid choice. Please enter a valid option.\n\n";
                     break;
                 }
+
+                // Wait for the user to press Enter
+                // cout << "Press Enter to continue...";
+                // cin.ignore();
+                // cin.get();
+
+                // // Clear the screen (Unix-like systems)
+                // system("clear");
             }
         }
 
     private:
         void performLengthConversions()
         {
+#ifdef _WIN32
+            system("cls");
+#endif
+
             double value;
             string sourceUnitStr, targetUnitStr;
 
             cout << "Give input like this." << endl;
             cout << "'m', 'cm', 'km', 'in', 'ft', 'yd', 'mile', 'nmile'" << endl;
-            cout << "Enter the source unit: ";
+            cout << "\nEnter the source unit: ";
             cin >> sourceUnitStr;
 
             cout << "Enter the target unit: ";
             cin >> targetUnitStr;
 
-            cout << "Enter the value: ";
+            cout << "\nEnter the value: ";
             cin >> value;
 
             sourceUnitStr = toLower(sourceUnitStr);
             targetUnitStr = toLower(targetUnitStr);
 
-            cout << "------------------------------------------------------------------------------------------------------------------------\n\n";
+            cout << "\n---------------------------------------------\n";
 
             if (unitMap.find(sourceUnitStr) != unitMap.end() && unitMap.find(targetUnitStr) != unitMap.end())
             {
@@ -325,7 +341,14 @@ namespace unit
                 cerr << "Unsupported source or target unit." << endl;
             }
 
-            cout << "\n\n------------------------------------------------------------------------------------------------------------------------\n\n";
+            cout << "---------------------------------------------\n";
+            // Wait for the user to press Enter
+            cout << "Press Enter to continue...";
+            cin.ignore();
+            cin.get();
+
+            // Clear the screen (Unix-like systems)
+            system("clear");
         }
 
         void performTemperatureConversions()
@@ -336,6 +359,10 @@ namespace unit
 
             while (true)
             {
+#ifdef _WIN32
+                system("cls");
+#endif
+
                 cout << "\nTemperature Conversion Menu:\n";
                 cout << "1. C -> F\n\n";
                 cout << "2. F -> C\n";
@@ -386,6 +413,13 @@ namespace unit
                          << "Invalid choice. Please enter a valid option.\n\n";
                     break;
                 }
+                // Wait for the user to press Enter
+                cout << "Press Enter to continue...";
+                cin.ignore();
+                cin.get();
+
+                // Clear the screen (Unix-like systems)
+                system("clear");
             }
         }
 
@@ -397,6 +431,10 @@ namespace unit
 
             while (true)
             {
+#ifdef _WIN32
+                system("cls");
+#endif
+
                 cout << "\nWeight Conversion Menu:\n\n";
                 cout << "1. lb -> kg\n";
                 cout << "2. kg -> lb\n";
@@ -437,6 +475,13 @@ namespace unit
                          << "Invalid choice. Please enter a valid option.\n\n";
                     break;
                 }
+                // Wait for the user to press Enter
+                cout << "Press Enter to continue...";
+                cin.ignore();
+                cin.get();
+
+                // Clear the screen (Unix-like systems)
+                system("clear");
             }
         }
 
@@ -448,6 +493,10 @@ namespace unit
 
             while (true)
             {
+#ifdef _WIN32
+                system("cls");
+#endif
+
                 cout << "\nSpeed Conversion Menu:\n\n";
                 cout << "1. mph -> kmph\n";
                 cout << "2. kmph -> mph\n";
@@ -488,6 +537,13 @@ namespace unit
                          << "Invalid choice. Please enter a valid option.\n\n";
                     break;
                 }
+                // Wait for the user to press Enter
+                cout << "Press Enter to continue...";
+                cin.ignore();
+                cin.get();
+
+                // Clear the screen (Unix-like systems)
+                system("clear");
             }
         }
 
@@ -499,6 +555,10 @@ namespace unit
 
             while (true)
             {
+#ifdef _WIN32
+                system("cls");
+#endif
+
                 cout << "\nPressure Conversion Menu:\n\n";
                 cout << "1. Pa -> atm\n";
                 cout << "2. atm -> Pa\n";
@@ -539,6 +599,13 @@ namespace unit
                          << "Invalid choice. Please enter a valid option.\n\n";
                     break;
                 }
+                // Wait for the user to press Enter
+                cout << "Press Enter to continue...";
+                cin.ignore();
+                cin.get();
+
+                // Clear the screen (Unix-like systems)
+                system("clear");
             }
         }
     };
