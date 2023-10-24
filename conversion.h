@@ -131,113 +131,128 @@ namespace unit
             }
         }
     };
-   
-    enum class TemperatureUnit {
-    Celsius,
-    Fahrenheit,
-    Kelvin
-};
 
-std::map<std::string, TemperatureUnit> temperatureMap = {
-    {"C", TemperatureUnit::Celsius},
-    {"F", TemperatureUnit::Fahrenheit},
-    {"K", TemperatureUnit::Kelvin}
-};
+    enum class TemperatureUnit
+    {
+        Celsius,
+        Fahrenheit,
+        Kelvin
+    };
 
-class TemperatureConversion {
-public:
-    TemperatureConversion(double value, TemperatureUnit sourceUnit, TemperatureUnit targetUnit)
-        : value(value), sourceUnit(sourceUnit), targetUnit(targetUnit) {}
+    map<string, TemperatureUnit> temperatureMap = {
+        {"c", TemperatureUnit::Celsius},
+        {"f", TemperatureUnit::Fahrenheit},
+        {"k", TemperatureUnit::Kelvin}};
 
-    double convert() {
-        double result = 0.0;
+    class TemperatureConversion
+    {
+    public:
+        TemperatureConversion(double value, TemperatureUnit sourceUnit, TemperatureUnit targetUnit)
+        {
+            this->value = value;
+            this->sourceUnit = sourceUnit;
+            this->targetUnit = targetUnit;
+        }
 
-        switch (targetUnit) {
+        double convert()
+        {
+            double kelvinValue = convertToKelvin();
+            double result = 0.0;
+
+            switch (targetUnit)
+            {
             case TemperatureUnit::Celsius:
-                result = convertToCelsius();
+                result = kelvinToCelsius(kelvinValue);
                 break;
             case TemperatureUnit::Fahrenheit:
-                result = convertToFahrenheit();
+                result = kelvinToFahrenheit(kelvinValue);
                 break;
             case TemperatureUnit::Kelvin:
-                result = convertToKelvin();
+                result = kelvinValue;
                 break;
             default:
                 std::cerr << "Unsupported target unit." << std::endl;
+            }
+
+            return result;
         }
 
-        return result;
-    }
+    private:
+        double value;
+        TemperatureUnit sourceUnit;
+        TemperatureUnit targetUnit;
 
-private:
-    double value;
-    TemperatureUnit sourceUnit;
-    TemperatureUnit targetUnit;
+        double convertToKelvin()
+        {
+            double kelvinValue = 0.0;
 
-    double convertToCelsius() {
-        if (sourceUnit == TemperatureUnit::Celsius) {
-            return value;
-        } else if (sourceUnit == TemperatureUnit::Fahrenheit) {
-            return (value - 32) * 5.0 / 9.0;
-        } else if (sourceUnit == TemperatureUnit::Kelvin) {
-            return value - 273.15;
-        } else {
-            std::cerr << "Unsupported source unit." << std::endl;
-            return 0.0;
+            switch (sourceUnit)
+            {
+            case TemperatureUnit::Celsius:
+                kelvinValue = celsiusToKelvin(value);
+                break;
+            case TemperatureUnit::Fahrenheit:
+                kelvinValue = fahrenheitToKelvin(value);
+                break;
+            case TemperatureUnit::Kelvin:
+                kelvinValue = value;
+                break;
+            default:
+                std::cerr << "Unsupported source unit." << std::endl;
+            }
+
+            return kelvinValue;
         }
-    }
 
-    double convertToFahrenheit() {
-        if (sourceUnit == TemperatureUnit::Fahrenheit) {
-            return value;
-        } else if (sourceUnit == TemperatureUnit::Celsius) {
-            return (value * 9.0 / 5.0) + 32;
-        } else if (sourceUnit == TemperatureUnit::Kelvin) {
-            double celsius = value - 273.15;
-            return (celsius * 9.0 / 5.0) + 32;
-        } else {
-            std::cerr << "Unsupported source unit." << std::endl;
-            return 0.0;
-        }
-    }
-
-    double convertToKelvin() {
-        if (sourceUnit == TemperatureUnit::Kelvin) {
-            return value;
-        } else if (sourceUnit == TemperatureUnit::Celsius) {
-            return value + 273.15;
-        } else if (sourceUnit == TemperatureUnit::Fahrenheit) {
-            double celsius = (value - 32) * 5.0 / 9.0;
+        double celsiusToKelvin(double celsius)
+        {
             return celsius + 273.15;
-        } else {
-            std::cerr << "Unsupported source unit." << std::endl;
-            return 0.0;
         }
-    }
-};
-    enum class WeightUnit {
-    Pounds,
-    Kilograms,
-    Ounces,
-    Grams,
-    Milligrams
-};
 
+        double fahrenheitToKelvin(double fahrenheit)
+        {
+            double celsius = (fahrenheit - 32) * 5.0 / 9.0;
+            return celsius + 273.15;
+        }
 
+        double kelvinToCelsius(double kelvin)
+        {
+            return kelvin - 273.15;
+        }
 
-class WeightConversion {
-public:
-    WeightConversion(double value, WeightUnit sourceUnit, WeightUnit targetUnit) {
-        this->value = value;
-        this->sourceUnit = sourceUnit;
-        this->targetUnit = targetUnit;
-    }
+        double kelvinToFahrenheit(double kelvin)
+        {
+            double celsius = kelvinToCelsius(kelvin);
+            return celsius * 9.0 / 5.0 + 32;
+        }
+    };
 
-    double convert() {
-        double valueInKilograms = convertToKilograms();
-        double result = 0.0;
+    enum class WeightUnit
+    {
+        Pounds,
+        Kilograms,
+        Ounces,
+        Grams,
+        Milligrams
+    };
 
-        switch (targetUnit) {
+    class WeightConversion
+    {
+    public:
+        WeightConversion(double value, WeightUnit sourceUnit, WeightUnit targetUnit)
+        {
+            this->value = value;
+            this->sourceUnit = sourceUnit;
+            this->targetUnit = targetUnit;
+        }
+
+        double convert()
+        {
+            double valueInKilograms = convertToKilograms();
+            double result = 0.0;
+
+            switch (targetUnit)
+            {
             case WeightUnit::Pounds:
                 result = valueInKilograms * 2.20462; // Conversion factor: Kilograms to Pounds
                 break;
@@ -254,36 +269,37 @@ public:
                 result = valueInKilograms * 1e6; // Conversion factor: Kilograms to Milligrams
                 break;
             default:
-                std::cerr << "Unsupported target unit." << std::endl;
+                cerr << "Unsupported target unit." << endl;
+            }
+
+            return result;
         }
 
-        return result;
-    }
+    private:
+        double value;
+        WeightUnit sourceUnit;
+        WeightUnit targetUnit;
 
-private:
-    double value;
-    WeightUnit sourceUnit;
-    WeightUnit targetUnit;
-
-    double convertToKilograms() {
-        switch (sourceUnit) {
+        double convertToKilograms()
+        {
+            switch (sourceUnit)
+            {
             case WeightUnit::Pounds:
-                return value / 2.20462; 
+                return value / 2.20462;
             case WeightUnit::Kilograms:
                 return value;
             case WeightUnit::Ounces:
-                return value / 35.274; 
+                return value / 35.274;
             case WeightUnit::Grams:
-                return value / 1000; 
+                return value / 1000;
             case WeightUnit::Milligrams:
-                return value / 1e6; 
+                return value / 1e6;
             default:
-                std::cerr << "Unsupported source unit." << std::endl;
+                cerr << "Unsupported source unit." << endl;
                 return 0.0;
+            }
         }
-    }
-    
-};
+    };
     enum speedUnit
     {
         MilesPerHour,
@@ -341,37 +357,40 @@ private:
         {
             return kmphTomps(kmph);
         }
-
     };
-    enum class PressureUnit {
-    Pascals,
-    Atmospheres,
-    Bars,
-    MillimetersOfMercury,
-    PoundsPerSquareInch
-};
+    enum class PressureUnit
+    {
+        Pascals,
+        Atmospheres,
+        Bars,
+        MillimetersOfMercury,
+        PoundsPerSquareInch
+    };
 
-std::map<std::string, PressureUnit> pressureUnitMap = {
-    {"Pa", PressureUnit::Pascals},
-    {"atm", PressureUnit::Atmospheres},
-    {"bar", PressureUnit::Bars},
-    {"mmHg", PressureUnit::MillimetersOfMercury},
-    {"psi", PressureUnit::PoundsPerSquareInch}
-};
+    map<string, PressureUnit> pressureUnitMap = {
+        {"Pa", PressureUnit::Pascals},
+        {"atm", PressureUnit::Atmospheres},
+        {"bar", PressureUnit::Bars},
+        {"mmHg", PressureUnit::MillimetersOfMercury},
+        {"psi", PressureUnit::PoundsPerSquareInch}};
 
-class PressureConversion {
-public:
-    PressureConversion(double value, PressureUnit sourceUnit, PressureUnit targetUnit) {
-        this->value = value;
-        this->sourceUnit = sourceUnit;
-        this->targetUnit = targetUnit;
-    }
+    class PressureConversion
+    {
+    public:
+        PressureConversion(double value, PressureUnit sourceUnit, PressureUnit targetUnit)
+        {
+            this->value = value;
+            this->sourceUnit = sourceUnit;
+            this->targetUnit = targetUnit;
+        }
 
-    double convert() {
-        double valueInPascals = convertToPascals();
-        double result = 0.0;
+        double convert()
+        {
+            double valueInPascals = convertToPascals();
+            double result = 0.0;
 
-        switch (targetUnit) {
+            switch (targetUnit)
+            {
             case PressureUnit::Pascals:
                 result = valueInPascals;
                 break;
@@ -388,24 +407,26 @@ public:
                 result = valueInPascals / psiToPascal;
                 break;
             default:
-                std::cerr << "Unsupported target unit." << std::endl;
+                cerr << "Unsupported target unit." << endl;
+            }
+
+            return result;
         }
 
-        return result;
-    }
+    private:
+        double value;
+        PressureUnit sourceUnit;
+        PressureUnit targetUnit;
 
-private:
-    double value;
-    PressureUnit sourceUnit;
-    PressureUnit targetUnit;
+        const double atmosphereToPascal = 101325.0;
+        const double barToPascal = 100000.0;
+        const double mmHgToPascal = 133.322;
+        const double psiToPascal = 6894.76;
 
-    const double atmosphereToPascal = 101325.0;
-    const double barToPascal = 100000.0;
-    const double mmHgToPascal = 133.322;
-    const double psiToPascal = 6894.76;
-
-    double convertToPascals() {
-        switch (sourceUnit) {
+        double convertToPascals()
+        {
+            switch (sourceUnit)
+            {
             case PressureUnit::Pascals:
                 return value;
             case PressureUnit::Atmospheres:
@@ -417,11 +438,11 @@ private:
             case PressureUnit::PoundsPerSquareInch:
                 return value * psiToPascal;
             default:
-                std::cerr << "Unsupported source unit." << std::endl;
+                cerr << "Unsupported source unit." << endl;
                 return 0.0;
+            }
         }
-    }
-};
+    };
 
     class ConversionManager
     {
@@ -474,24 +495,28 @@ private:
     private:
         void performLengthConversions()
         {
+#ifdef _WIN32
+            system("cls");
+#endif
+
             double value;
             string sourceUnitStr, targetUnitStr;
 
             cout << "Give input like this." << endl;
             cout << "'m', 'cm', 'km', 'in', 'ft', 'yd', 'mile', 'nmile'" << endl;
-            cout << "Enter the source unit: ";
+            cout << "\nEnter the source unit: ";
             cin >> sourceUnitStr;
 
             cout << "Enter the target unit: ";
             cin >> targetUnitStr;
 
-            cout << "Enter the value: ";
+            cout << "\nEnter the value: ";
             cin >> value;
 
             sourceUnitStr = toLower(sourceUnitStr);
             targetUnitStr = toLower(targetUnitStr);
 
-            cout << "------------------------------------------------------------------------------------------------------------------------\n\n";
+            cout << "\n---------------------------------------------\n";
 
             if (unitMap.find(sourceUnitStr) != unitMap.end() && unitMap.find(targetUnitStr) != unitMap.end())
             {
@@ -508,302 +533,305 @@ private:
                 cerr << "Unsupported source or target unit." << endl;
             }
 
-            cout << "\n\n------------------------------------------------------------------------------------------------------------------------\n\n";
+            cout << "---------------------------------------------\n";
+            // Wait for the user to press Enter
+            cout << "Press Enter to continue...";
+            cin.ignore();
+            cin.get();
+
+            // Clear the screen (Unix-like systems)
+            system("clear");
         }
-void performTemperatureConversions() {
-    std::map<std::string, TemperatureUnit> temperatureMap = {
-        {"C", TemperatureUnit::Celsius},
-        {"F", TemperatureUnit::Fahrenheit},
-        {"K", TemperatureUnit::Kelvin}
-    };
+        void performTemperatureConversions()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
 
-    while (true) {
-        std::cout << "\nTemperature Conversion Menu:\n";
-        std::cout << "1. Celsius to Fahrenheit\n";
-        std::cout << "2. Fahrenheit to Celsius\n";
-        std::cout << "3. Celsius to Kelvin\n";
-        std::cout << "4. Kelvin to Celsius\n";
-        std::cout << "5. Fahrenheit to Kelvin\n";
-        std::cout << "6. Kelvin to Fahrenheit\n";
-        std::cout << "0. Back to Main Menu\n";
-        std::cout << "Enter your choice (0-6): ";
+            double value;
+            string sourceUnitStr, targetUnitStr;
 
-        int choice;
-        std::cin >> choice;
+            cout << "Give input like this." << endl;
+            cout << "'c', 'f', 'k'" << endl;
+            cout << "\nEnter the source unit: ";
+            cin >> sourceUnitStr;
 
-        if (choice == 0) {
-            break; // Return to the main menu
-        }
+            cout << "Enter the target unit: ";
+            cin >> targetUnitStr;
 
-        if (choice < 1 || choice > 6) {
-            std::cerr << "Invalid choice. Please enter a valid option.\n";
-            continue;
-        }
+            cout << "\nEnter the value: ";
+            cin >> value;
 
-        std::string sourceUnitStr, targetUnitStr;
-        double value;
+            sourceUnitStr = toLower(sourceUnitStr);
+            targetUnitStr = toLower(targetUnitStr);
 
-        std::cout << "\nEnter the temperature value to convert: ";
-        std::cin >> value;
+            cout << "\n---------------------------------------------\n";
 
-        if (!std::cin) {
-            std::cerr << "Invalid input. Please enter a numeric value.\n";
-            std::cin.clear();
-          
-            continue;
-        }
+            if (temperatureMap.find(sourceUnitStr) != temperatureMap.end() && temperatureMap.find(targetUnitStr) != temperatureMap.end())
+            {
+                TemperatureUnit sourceUnit = temperatureMap[sourceUnitStr];
+                TemperatureUnit targetUnit = temperatureMap[targetUnitStr];
 
-        std::cout << "Enter the source temperature unit (C, F, or K): ";
-        std::cin >> sourceUnitStr;
-        std::cout << "Enter the target temperature unit (C, F, or K): ";
-        std::cin >> targetUnitStr;
+                TemperatureConversion converter(value, sourceUnit, targetUnit);
+                double result = converter.convert();
 
-        sourceUnitStr = toLower(sourceUnitStr);
-        targetUnitStr = toLower(targetUnitStr);
+                cout << value << " " << sourceUnitStr << " = " << result << " " << targetUnitStr << endl;
+            }
+            else
+            {
+                cerr << "Unsupported source or target unit." << endl;
+            }
 
-        if (temperatureMap.find(sourceUnitStr) == temperatureMap.end() ||
-            temperatureMap.find(targetUnitStr) == temperatureMap.end()) {
-            std::cerr << "Unsupported source or target temperature unit.\n";
-            continue;
-        }
+            cout << "---------------------------------------------\n";
+            // Wait for the user to press Enter
+            cout << "Press Enter to continue...";
+            cin.ignore();
+            cin.get();
 
-        TemperatureUnit sourceUnit = temperatureMap[sourceUnitStr];
-        TemperatureUnit targetUnit = temperatureMap[targetUnitStr];
-
-        TemperatureConversion converter(value, sourceUnit, targetUnit);
-        double result = converter.convert();
-
-        std::cout << value << " " << sourceUnitStr << " = " << result << " " << targetUnitStr << "\n";
-    }
-}
-
-
-        void performWeightConversions() {
-    std::map<std::string, WeightUnit> weightMap = {
-        {"lb", WeightUnit::Pounds},
-        {"kg", WeightUnit::Kilograms},
-        {"oz", WeightUnit::Ounces},
-        {"g", WeightUnit::Grams},
-        {"mg", WeightUnit::Milligrams}
-    };
-
-    while (true) {
-        std::cout << "\nWeight Conversion Menu:\n";
-        std::cout << "1. Pounds to Kilograms\n";
-        std::cout << "2. Kilograms to Pounds\n";
-        std::cout << "3. Ounces to Kilograms\n";
-        std::cout << "4. Kilograms to Ounces\n";
-        std::cout << "5. Grams to Kilograms\n";
-        std::cout << "6. Kilograms to Grams\n";
-        std::cout << "7. Milligrams to Kilograms\n";
-        std::cout << "8. Kilograms to Milligrams\n";
-        std::cout << "0. Back to Main Menu\n";
-        std::cout << "Enter your choice (0-8): ";
-
-        int choice;
-        std::cin >> choice;
-
-        if (choice == 0) {
-            break; // Return to the main menu
+            // Clear the screen (Unix-like systems)
+            system("clear");
         }
 
-        if (choice < 1 || choice > 8) {
-            std::cerr << "Invalid choice. Please enter a valid option.\n";
-            continue;
+        void performWeightConversions()
+        {
+            map<string, WeightUnit> weightMap = {
+                {"lb", WeightUnit::Pounds},
+                {"kg", WeightUnit::Kilograms},
+                {"oz", WeightUnit::Ounces},
+                {"g", WeightUnit::Grams},
+                {"mg", WeightUnit::Milligrams}};
+
+            while (true)
+            {
+                cout << "\nWeight Conversion Menu:\n";
+                cout << "1. Pounds to Kilograms\n";
+                cout << "2. Kilograms to Pounds\n";
+                cout << "3. Ounces to Kilograms\n";
+                cout << "4. Kilograms to Ounces\n";
+                cout << "5. Grams to Kilograms\n";
+                cout << "6. Kilograms to Grams\n";
+                cout << "7. Milligrams to Kilograms\n";
+                cout << "8. Kilograms to Milligrams\n";
+                cout << "0. Back to Main Menu\n";
+                cout << "Enter your choice (0-8): ";
+
+                int choice;
+                cin >> choice;
+
+                if (choice == 0)
+                {
+                    break; // Return to the main menu
+                }
+
+                if (choice < 1 || choice > 8)
+                {
+                    cerr << "Invalid choice. Please enter a valid option.\n";
+                    continue;
+                }
+
+                string sourceUnitStr, targetUnitStr;
+                double value;
+
+                cout << "\nEnter the weight value to convert: ";
+                cin >> value;
+
+                if (!cin)
+                {
+                    cerr << "Invalid input. Please enter a numeric value.\n";
+                    cin.clear();
+                }
+
+                cout << "Enter the source weight unit (lb, kg, oz, g, or mg): ";
+                cin >> sourceUnitStr;
+                cout << "Enter the target weight unit (lb, kg, oz, g, or mg): ";
+                cin >> targetUnitStr;
+
+                sourceUnitStr = toLower(sourceUnitStr);
+                targetUnitStr = toLower(targetUnitStr);
+
+                if (weightMap.find(sourceUnitStr) == weightMap.end() ||
+                    weightMap.find(targetUnitStr) == weightMap.end())
+                {
+                    cerr << "Unsupported source or target weight unit.\n";
+                    continue;
+                }
+
+                WeightUnit sourceUnit = weightMap[sourceUnitStr];
+                WeightUnit targetUnit = weightMap[targetUnitStr];
+
+                WeightConversion converter(value, sourceUnit, targetUnit);
+                double result = converter.convert();
+
+                cout << value << " " << sourceUnitStr << " = " << result << " " << targetUnitStr << "\n";
+            }
         }
 
-        std::string sourceUnitStr, targetUnitStr;
-        double value;
+        void performSpeedConversions()
+        {
+            map<string, speedUnit> speedMap = {
+                {"m/s", speedUnit::MetersPerSecond},
+                {"km/h", speedUnit::KilometersPerHour},
+                {"mph", speedUnit::MilesPerHour},
+                {"kn", speedUnit::Knots}};
 
-        std::cout << "\nEnter the weight value to convert: ";
-        std::cin >> value;
+            while (true)
+            {
+                cout << "\nSpeed Conversion Menu:\n";
+                cout << "1. Meters per Second to Kilometers per Hour\n";
+                cout << "2. Kilometers per Hour to Meters per Second\n";
+                cout << "3. Meters per Second to Miles per Hour\n";
+                cout << "4. Miles per Hour to Meters per Second\n";
+                cout << "5. Meters per Second to Knots\n";
+                cout << "6. Knots to Meters per Second\n";
+                cout << "0. Back to Main Menu\n";
+                cout << "Enter your choice (0-6): ";
 
-        if (!std::cin) {
-            std::cerr << "Invalid input. Please enter a numeric value.\n";
-            std::cin.clear();
-           
+                int choice;
+                cin >> choice;
+
+                if (choice == 0)
+                {
+                    break; // Return to the main menu
+                }
+
+                if (choice < 1 || choice > 6)
+                {
+                    cerr << "Invalid choice. Please enter a valid option.\n";
+                    continue;
+                }
+
+                string sourceUnitStr, targetUnitStr;
+                double value;
+
+                cout << "\nEnter the speed value to convert: ";
+                cin >> value;
+
+                if (!cin)
+                {
+                    cerr << "Invalid input. Please enter a numeric value.\n";
+                    cin.clear();
+                }
+
+                cout << "Enter the source speed unit (m/s, km/h, mph, or kn): ";
+                cin >> sourceUnitStr;
+                cout << "Enter the target speed unit (m/s, km/h, mph, or kn): ";
+                cin >> targetUnitStr;
+
+                sourceUnitStr = toLower(sourceUnitStr);
+                targetUnitStr = toLower(targetUnitStr);
+
+                if (speedMap.find(sourceUnitStr) == speedMap.end() ||
+                    speedMap.find(targetUnitStr) == speedMap.end())
+                {
+                    cerr << "Unsupported source or target speed unit.\n";
+                    continue;
+                }
+
+                speedUnit sourceUnit = speedMap[sourceUnitStr];
+                speedUnit targetUnit = speedMap[targetUnitStr];
+
+                SpeedConversion converter;
+                double result = 0.0;
+
+                // Perform the specified speed conversion based on the user's choice
+                switch (choice)
+                {
+                case 1:
+                    result = converter.mpsTokmph(value);
+                    break;
+                case 2:
+                    result = converter.kmphToMph(value);
+                    break;
+                case 3:
+                    result = converter.mpsToMph(value);
+                    break;
+                case 4:
+                    result = converter.MphTomps(value);
+                    break;
+                case 5:
+                    result = converter.mpsToKnots(value);
+                    break;
+                case 6:
+                    result = converter.knotsTomps(value);
+                    break;
+                }
+
+                cout << value << " " << sourceUnitStr << " = " << result << " " << targetUnitStr << "\n";
+            }
         }
+        void performPressureConversions()
+        {
+            map<string, PressureUnit> pressureMap = {
+                {"Pa", PressureUnit::Pascals},
+                {"atm", PressureUnit::Atmospheres},
+                {"bar", PressureUnit::Bars},
+                {"mmHg", PressureUnit::MillimetersOfMercury},
+                {"psi", PressureUnit::PoundsPerSquareInch}};
 
-        std::cout << "Enter the source weight unit (lb, kg, oz, g, or mg): ";
-        std::cin >> sourceUnitStr;
-        std::cout << "Enter the target weight unit (lb, kg, oz, g, or mg): ";
-        std::cin >> targetUnitStr;
+            while (true)
+            {
+                cout << "\nPressure Conversion Menu:\n";
+                cout << "1. Pascals to Atmospheres\n";
+                cout << "2. Atmospheres to Pascals\n";
+                cout << "3. Pascals to Bars\n";
+                cout << "4. Bars to Pascals\n";
+                cout << "5. Pascals to Millimeters of Mercury\n";
+                cout << "6. Millimeters of Mercury to Pascals\n";
+                cout << "7. Pascals to Pounds per Square Inch\n";
+                cout << "8. Pounds per Square Inch to Pascals\n";
+                cout << "0. Back to Main Menu\n";
+                cout << "Enter your choice (0-8): ";
 
-        sourceUnitStr = toLower(sourceUnitStr);
-        targetUnitStr = toLower(targetUnitStr);
+                int choice;
+                cin >> choice;
 
-        if (weightMap.find(sourceUnitStr) == weightMap.end() ||
-            weightMap.find(targetUnitStr) == weightMap.end()) {
-            std::cerr << "Unsupported source or target weight unit.\n";
-            continue;
+                if (choice == 0)
+                {
+                    break; // Return to the main menu
+                }
+
+                if (choice < 1 || choice > 8)
+                {
+                    cerr << "Invalid choice. Please enter a valid option.\n";
+                    continue;
+                }
+
+                string sourceUnitStr, targetUnitStr;
+                double value;
+
+                cout << "\nEnter the pressure value to convert: ";
+                cin >> value;
+
+                if (!cin)
+                {
+                    cerr << "Invalid input. Please enter a numeric value.\n";
+                    cin.clear();
+                }
+
+                cout << "Enter the source pressure unit (Pa, atm, bar, mmHg, or psi): ";
+                cin >> sourceUnitStr;
+                cout << "Enter the target pressure unit (Pa, atm, bar, mmHg, or psi): ";
+                cin >> targetUnitStr;
+
+                sourceUnitStr = toLower(sourceUnitStr);
+                targetUnitStr = toLower(targetUnitStr);
+
+                if (pressureMap.find(sourceUnitStr) == pressureMap.end() ||
+                    pressureMap.find(targetUnitStr) == pressureMap.end())
+                {
+                    cerr << "Unsupported source or target pressure unit.\n";
+                    continue;
+                }
+
+                PressureUnit sourceUnit = pressureMap[sourceUnitStr];
+                PressureUnit targetUnit = pressureMap[targetUnitStr];
+
+                PressureConversion converter(value, sourceUnit, targetUnit);
+                double result = converter.convert();
+
+                cout << value << " " << sourceUnitStr << " = " << result << " " << targetUnitStr << "\n";
+            }
         }
-
-        WeightUnit sourceUnit = weightMap[sourceUnitStr];
-        WeightUnit targetUnit = weightMap[targetUnitStr];
-
-        WeightConversion converter(value, sourceUnit, targetUnit);
-        double result = converter.convert();
-
-        std::cout << value << " " << sourceUnitStr << " = " << result << " " << targetUnitStr << "\n";
-    }
-}
-
-        void performSpeedConversions() {
-    std::map<std::string, speedUnit> speedMap = {
-        {"m/s", speedUnit::MetersPerSecond},
-        {"km/h", speedUnit::KilometersPerHour},
-        {"mph", speedUnit::MilesPerHour},
-        {"kn", speedUnit::Knots}
-    };
-
-    while (true) {
-        std::cout << "\nSpeed Conversion Menu:\n";
-        std::cout << "1. Meters per Second to Kilometers per Hour\n";
-        std::cout << "2. Kilometers per Hour to Meters per Second\n";
-        std::cout << "3. Meters per Second to Miles per Hour\n";
-        std::cout << "4. Miles per Hour to Meters per Second\n";
-        std::cout << "5. Meters per Second to Knots\n";
-        std::cout << "6. Knots to Meters per Second\n";
-        std::cout << "0. Back to Main Menu\n";
-        std::cout << "Enter your choice (0-6): ";
-
-        int choice;
-        std::cin >> choice;
-
-        if (choice == 0) {
-            break; // Return to the main menu
-        }
-
-        if (choice < 1 || choice > 6) {
-            std::cerr << "Invalid choice. Please enter a valid option.\n";
-            continue;
-        }
-
-        std::string sourceUnitStr, targetUnitStr;
-        double value;
-
-        std::cout << "\nEnter the speed value to convert: ";
-        std::cin >> value;
-
-        if (!std::cin) {
-            std::cerr << "Invalid input. Please enter a numeric value.\n";
-            std::cin.clear();
-        }
-
-        std::cout << "Enter the source speed unit (m/s, km/h, mph, or kn): ";
-        std::cin >> sourceUnitStr;
-        std::cout << "Enter the target speed unit (m/s, km/h, mph, or kn): ";
-        std::cin >> targetUnitStr;
-
-        sourceUnitStr = toLower(sourceUnitStr);
-        targetUnitStr = toLower(targetUnitStr);
-
-        if (speedMap.find(sourceUnitStr) == speedMap.end() ||
-            speedMap.find(targetUnitStr) == speedMap.end()) {
-            std::cerr << "Unsupported source or target speed unit.\n";
-            continue;
-        }
-
-        speedUnit sourceUnit = speedMap[sourceUnitStr];
-        speedUnit targetUnit = speedMap[targetUnitStr];
-
-        SpeedConversion converter;
-        double result = 0.0;
-
-        // Perform the specified speed conversion based on the user's choice
-        switch (choice) {
-            case 1:
-                result = converter.mpsTokmph(value);
-                break;
-            case 2:
-                result = converter.kmphToMph(value);
-                break;
-            case 3:
-                result = converter.mpsToMph(value);
-                break;
-            case 4:
-                result = converter.MphTomps(value);
-                break;
-            case 5:
-                result = converter.mpsToKnots(value);
-                break;
-            case 6:
-                result = converter. knotsTomps(value);
-                break;
-        }
-
-        std::cout << value << " " << sourceUnitStr << " = " << result << " " << targetUnitStr << "\n";
-    }
-}
-void performPressureConversions() {
-    std::map<std::string, PressureUnit> pressureMap = {
-        {"Pa", PressureUnit::Pascals},
-        {"atm", PressureUnit::Atmospheres},
-        {"bar", PressureUnit::Bars},
-        {"mmHg", PressureUnit::MillimetersOfMercury},
-        {"psi", PressureUnit::PoundsPerSquareInch}
-    };
-
-    while (true) {
-        std::cout << "\nPressure Conversion Menu:\n";
-        std::cout << "1. Pascals to Atmospheres\n";
-        std::cout << "2. Atmospheres to Pascals\n";
-        std::cout << "3. Pascals to Bars\n";
-        std::cout << "4. Bars to Pascals\n";
-        std::cout << "5. Pascals to Millimeters of Mercury\n";
-        std::cout << "6. Millimeters of Mercury to Pascals\n";
-        std::cout << "7. Pascals to Pounds per Square Inch\n";
-        std::cout << "8. Pounds per Square Inch to Pascals\n";
-        std::cout << "0. Back to Main Menu\n";
-        std::cout << "Enter your choice (0-8): ";
-
-        int choice;
-        std::cin >> choice;
-
-        if (choice == 0) {
-            break; // Return to the main menu
-        }
-
-        if (choice < 1 || choice > 8) {
-            std::cerr << "Invalid choice. Please enter a valid option.\n";
-            continue;
-        }
-
-        std::string sourceUnitStr, targetUnitStr;
-        double value;
-
-        std::cout << "\nEnter the pressure value to convert: ";
-        std::cin >> value;
-
-        if (!std::cin) {
-            std::cerr << "Invalid input. Please enter a numeric value.\n";
-            std::cin.clear();
-        }
-
-        std::cout << "Enter the source pressure unit (Pa, atm, bar, mmHg, or psi): ";
-        std::cin >> sourceUnitStr;
-        std::cout << "Enter the target pressure unit (Pa, atm, bar, mmHg, or psi): ";
-        std::cin >> targetUnitStr;
-
-        sourceUnitStr = toLower(sourceUnitStr);
-        targetUnitStr = toLower(targetUnitStr);
-
-        if (pressureMap.find(sourceUnitStr) == pressureMap.end() ||
-            pressureMap.find(targetUnitStr) == pressureMap.end()) {
-            std::cerr << "Unsupported source or target pressure unit.\n";
-            continue;
-        }
-
-        PressureUnit sourceUnit = pressureMap[sourceUnitStr];
-        PressureUnit targetUnit = pressureMap[targetUnitStr];
-
-        PressureConversion converter(value, sourceUnit, targetUnit);
-        double result = converter.convert();
-
-        std::cout << value << " " << sourceUnitStr << " = " << result << " " << targetUnitStr << "\n";
-    }
-}
-
     };
 }
 

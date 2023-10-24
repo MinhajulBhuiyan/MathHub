@@ -206,114 +206,114 @@ namespace MatrixLibrary
     public:
         // Function to choose the matrix operation
         void performMatrixOperation()
-    {
-        while (true)
         {
-            #ifdef _WIN32
-            system("cls");
-            #endif
-            int operationChoice;
-            cout << "Choose a matrix operation:\n\n";
-            cout << "1. Matrix Addition\n";
-            cout << "2. Matrix Subtraction\n";
-            cout << "3. Matrix Multiplication\n";
-            cout << "4. Matrix Inversion\n";
-            cout << "5. Calculate Determinant\n";
-            cout << "0. Exit\n\n";
-            cout << "Enter your choice (0/1/2/3/4/5): ";
-            cin >> operationChoice;
-
-            if (operationChoice == 0)
+            while (true)
             {
-                break; // Exit the program
-            }
+#ifdef _WIN32
+                system("cls");
+#endif
+                int operationChoice;
+                cout << "Choose a matrix operation:\n\n";
+                cout << "1. Matrix Addition\n";
+                cout << "2. Matrix Subtraction\n";
+                cout << "3. Matrix Multiplication\n";
+                cout << "4. Matrix Inversion\n";
+                cout << "5. Calculate Determinant\n";
+                cout << "0. Exit\n\n";
+                cout << "Enter your choice (0/1/2/3/4/5): ";
+                cin >> operationChoice;
 
-            if (operationChoice < 1 || operationChoice > 5)
-            {
-                cout << "\nInvalid choice for the matrix operation. Please enter 1, 2, 3, 4, or 5.\n\n";
-                continue;
-            }
-
-            int dimension;
-            cout << "\nChoose the matrix dimension (2 for 2x2, 3 for 3x3): ";
-            cin >> dimension;
-
-            if (dimension < 2 || dimension > 3)
-            {
-                cout << "Invalid matrix dimension. Please enter 2 for 2x2 or 3 for 3x3.\n";
-                continue;
-            }
-
-            cin.ignore(); // Consume the newline character after entering the dimension.
-
-            vector<vector<double>> matrixA = inputMatrix(dimension, "Matrix A");
-
-            switch (operationChoice)
-            {
-            case 1:
-            {
-                vector<vector<double>> matrixB = inputMatrix(dimension, "Matrix B");
-                vector<vector<double>> resultAddition = MatrixOperations::matrixAddition(matrixA, matrixB);
-                printMatrix(resultAddition, "\nMatrix A + Matrix B");
-                break;
-            }
-            case 2:
-            {
-                vector<vector<double>> matrixB = inputMatrix(dimension, "Matrix B");
-                vector<vector<double>> resultSubtraction = MatrixOperations::matrixSubtraction(matrixA, matrixB);
-                printMatrix(resultSubtraction, "\nMatrix A - Matrix B");
-                break;
-            }
-            case 3:
-            {
-                int dimensionB;
-                cout << "Choose the dimension of Matrix B (2 for 2x2, 3 for 3x3): ";
-                cin >> dimensionB;
-                if (dimensionB < 2 || dimensionB > 3)
+                if (operationChoice == 0)
                 {
-                    cout << "Invalid matrix dimension for Matrix B. Please enter 2 for 2x2 or 3 for 3x3.\n";
+                    break; // Exit the program
+                }
+
+                if (operationChoice < 1 || operationChoice > 5)
+                {
+                    cout << "\nInvalid choice for the matrix operation. Please enter 1, 2, 3, 4, or 5.\n\n";
                     continue;
                 }
-                cin.ignore();
-                vector<vector<double>> matrixB = inputMatrix(dimensionB, "Matrix B");
-                if (dimension != dimensionB)
+
+                int dimension;
+                cout << "\nChoose the matrix dimension (2 for 2x2, 3 for 3x3): ";
+                cin >> dimension;
+
+                if (dimension < 2 || dimension > 3)
                 {
-                    cout << "Matrix dimensions are not compatible for multiplication.\n";
+                    cout << "Invalid matrix dimension. Please enter 2 for 2x2 or 3 for 3x3.\n";
                     continue;
                 }
-                vector<vector<double>> resultMultiplication = MatrixOperations::matrixMultiplication(matrixA, matrixB);
-                printMatrix(resultMultiplication, "\nMatrix A * Matrix B");
-                break;
-            }
-            case 4:
-            {
-                vector<vector<double>> resultInversion = MatrixOperations::matrixInversion(matrixA);
-                if (!resultInversion.empty())
-                {
-                    printMatrix(resultInversion, "Inverse of Matrix A");
-                }
-                break;
-            }
-            case 5:
-            {
-                double determinant = MatrixOperations::calculateDeterminant(matrixA);
-                if (!isnan(determinant))
-                {
-                    cout << "\nDeterminant of Matrix A: " << determinant << endl;
-                }
-                break;
-            }
-            default:
-                cout << "\nInvalid choice. Please enter a valid option.\n";
-                break;
-            }
 
-            // Wait for the user to press Enter before proceeding
-            cout << "\nPress Enter to continue...";
-            cin.get(); // This line will read the Enter keypress
-            cin.get(); // This line will wait for an additional Enter keypress
+                cin.ignore(); // Consume the newline character after entering the dimension.
+
+                vector<vector<double>> matrixA = inputMatrix(dimension, "Matrix A");
+
+                switch (operationChoice)
+                {
+                case 1:
+                {
+                    vector<vector<double>> matrixB = inputMatrix(dimension, "Matrix B");
+                    vector<vector<double>> resultAddition = MatrixOperations::matrixAddition(matrixA, matrixB);
+                    printMatrix(resultAddition, "\nMatrix A + Matrix B");
+                    break;
+                }
+                case 2:
+                {
+                    vector<vector<double>> matrixB = inputMatrix(dimension, "Matrix B");
+                    vector<vector<double>> resultSubtraction = MatrixOperations::matrixSubtraction(matrixA, matrixB);
+                    printMatrix(resultSubtraction, "\nMatrix A - Matrix B");
+                    break;
+                }
+                case 3:
+                {
+                    int dimensionB;
+                    cout << "Choose the dimension of Matrix B (2 for 2x2, 3 for 3x3): ";
+                    cin >> dimensionB;
+                    if (dimensionB < 2 || dimensionB > 3)
+                    {
+                        cout << "Invalid matrix dimension for Matrix B. Please enter 2 for 2x2 or 3 for 3x3.\n";
+                        continue;
+                    }
+                    cin.ignore();
+                    vector<vector<double>> matrixB = inputMatrix(dimensionB, "Matrix B");
+                    if (dimension != dimensionB)
+                    {
+                        cout << "Matrix dimensions are not compatible for multiplication.\n";
+                        continue;
+                    }
+                    vector<vector<double>> resultMultiplication = MatrixOperations::matrixMultiplication(matrixA, matrixB);
+                    printMatrix(resultMultiplication, "\nMatrix A * Matrix B");
+                    break;
+                }
+                case 4:
+                {
+                    vector<vector<double>> resultInversion = MatrixOperations::matrixInversion(matrixA);
+                    if (!resultInversion.empty())
+                    {
+                        printMatrix(resultInversion, "Inverse of Matrix A");
+                    }
+                    break;
+                }
+                case 5:
+                {
+                    double determinant = MatrixOperations::calculateDeterminant(matrixA);
+                    if (!isnan(determinant))
+                    {
+                        cout << "\nDeterminant of Matrix A: " << determinant << endl;
+                    }
+                    break;
+                }
+                default:
+                    cout << "\nInvalid choice. Please enter a valid option.\n";
+                    break;
+                }
+
+                // Wait for the user to press Enter before proceeding
+                cout << "\nPress Enter to continue...";
+                cin.get(); // This line will read the Enter keypress
+                cin.get(); // This line will wait for an additional Enter keypress
+            }
         }
-    }
     };
 }
 

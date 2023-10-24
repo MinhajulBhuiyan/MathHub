@@ -60,9 +60,9 @@ namespace logarithm
         {
             while (true)
             {
-                #ifdef _WIN32
-                   system("cls");
-                #endif
+#ifdef _WIN32
+                system("cls");
+#endif
                 int choice;
                 double value;
 
@@ -93,14 +93,14 @@ namespace logarithm
                         }
                         else
                         {
-                            cout << "\n---------------------------------------------\nln(" << value << ") = " << result <<"\n---------------------------------------------" << endl;
+                            cout << "\n---------------------------------------------\nln(" << value << ") = " << result << "\n---------------------------------------------" << endl;
                         }
                         break;
                     }
                     case 2:
                     {
                         double result = customExpFunction(value);
-                        cout << "\n---------------------------------------------\ne^" << value << " = " << result <<"\n---------------------------------------------" << endl;
+                        cout << "\n---------------------------------------------\ne^" << value << " = " << result << "\n---------------------------------------------" << endl;
                         break;
                     }
                     }
