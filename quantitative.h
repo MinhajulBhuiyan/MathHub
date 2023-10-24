@@ -199,6 +199,30 @@ namespace quantitative
         }
     };
 
+    class Circle
+    {
+    private:
+        double radius;
+
+    public:
+        Circle(double r) : radius(r) {}
+
+        double getDiameter() const
+        {
+            return 2 * radius;
+        }
+
+        double getArea() const
+        {
+            return M_PI * radius * radius; // M_PI is a constant for pi
+        }
+
+        double getPerimeter() const
+        {
+            return 2 * M_PI * radius;
+        }
+    };
+
     class QuantitativeManager
     {
     public:
@@ -208,10 +232,10 @@ namespace quantitative
 
             while (true)
             {
-                #ifdef _WIN32
-                    system("cls");
-                #endif
-               
+#ifdef _WIN32
+                system("cls");
+#endif
+
                 cout << "Choose a Shape:\n\n";
                 cout << "1. Triangle\n";
                 cout << "2. Quadrilateral\n";
@@ -219,6 +243,8 @@ namespace quantitative
                 cout << "0. Back to the previous menu\n\n";
                 cout << "Enter your choice (0/1/2/3): ";
                 cin >> choice;
+
+                system("clear");
 
                 if (choice == 0)
                 {
@@ -233,12 +259,15 @@ namespace quantitative
                 case 2:
                     calculateQuadrilateralProperties();
                     break;
+                case 3:
+                    calculateCircleProperties();
+                    break;
                 default:
                     cout << "Invalid choice. Please enter a valid option.\n\n\n";
                     break;
                 }
 
-                cout << "Press Enter to continue...";
+                cout << "\nPress Enter to continue...";
                 cin.get(); // This line will read the Enter keypress
                 cin.get(); // This line will wait for an additional Enter keypress
             }
@@ -250,11 +279,14 @@ namespace quantitative
             double side1, side2, side3;
 
             // Input the sides of the triangle from the user
-            cout << "Enter the lengths of the three sides of the triangle:\n";
+            cout << "Triangle\n";
+            cout << "Enter the lengths of the three sides of the triangle: ";
 
             cin >> side1;
             cin >> side2;
             cin >> side3;
+
+            cout << "\n---------------------------------------------\n";
 
             // Check if the sides can form a triangle
             if (side1 + side2 > side3 && side1 + side3 > side2 && side2 + side3 > side1)
@@ -263,10 +295,9 @@ namespace quantitative
                 Triangle triangle(side1, side2, side3);
 
                 // Calculate and display the properties of the triangle
-                cout << "\n\nTriangle Properties:\n------------------------------------------------------------\n";
+                cout << "Triangle Properties:\n\n";
                 cout << "Area: " << triangle.calculateArea() << endl;
-                cout << "Perimeter: " << triangle.calculatePerimeter() << endl
-                     << endl;
+                cout << "Perimeter: " << triangle.calculatePerimeter() << endl;
 
                 double angleA, angleB, angleC;
                 triangle.calculateAngles(angleA, angleB, angleC);
@@ -274,6 +305,7 @@ namespace quantitative
                 cout << "<A: " << angleA << ", ";
                 cout << "<B: " << angleB << ", ";
                 cout << "<C: " << angleC << "." << endl;
+                cout << "Triangle Type: ";
 
                 if (triangle.isRightAngle())
                 {
@@ -290,17 +322,17 @@ namespace quantitative
 
                 if (triangle.isEquilateral())
                 {
-                    cout << "Equilateral Triangle\n"
+                    cout << "Equilateral."
                          << endl;
                 }
                 if (triangle.isScalene())
                 {
-                    cout << "Scalene Triangle\n"
+                    cout << "Scalene."
                          << endl;
                 }
                 if (triangle.isIsosceles())
                 {
-                    cout << "Isosceles Triangle\n"
+                    cout << "Isosceles."
                          << endl;
                 }
             }
@@ -308,6 +340,8 @@ namespace quantitative
             {
                 cout << "These side lengths cannot build a triangle." << endl;
             }
+
+            cout << "---------------------------------------------\n";
         }
 
     private:
@@ -315,29 +349,69 @@ namespace quantitative
         {
             double side1, side2, side3, side4;
 
+            cout << "Quadrilateral\n";
             // Input the sides of the quadrilateral from the user
-            cout << "Enter the lengths of the four sides of the quadrilateral:\n";
+            cout << "Enter the lengths of the four sides of the quadrilateral: ";
 
             cin >> side1;
             cin >> side2;
             cin >> side3;
             cin >> side4;
 
-            // Check if the sides can form a quadrilateral
-            if ((side1 + side2 > side3) && (side1 + side3 > side2) && (side2 + side3 > side1))
-            {
-                Quadrilateral quadrilateral(side1, side2, side3, side4);
+            cout << "\n---------------------------------------------\n";
 
-                // Calculate and display the properties of the quadrilateral
-                cout << "\n\nQuadrilateral Properties:\n";
-                cout << "Area: " << quadrilateral.calculateArea() << endl;
-                cout << "Perimeter: " << quadrilateral.calculatePerimeter() << endl
-                     << endl;
+            // Check if the sides can form a quadrilateral
+
+            Quadrilateral quadrilateral(side1, side2, side3, side4);
+
+            // Determine the type of the quadrilateral
+            QuadrilateralType type = quadrilateral.classifyQuadrilateral();
+
+            // Calculate and display the properties of the quadrilateral
+            cout << "Quadrilateral Properties:\n\n";
+            cout << "Type: ";
+            if (type == SQUARE)
+                cout << "Square";
+            else if (type == RECTANGLE)
+                cout << "Rectangle";
+            else
+                cout << "General";
+
+            cout << "\nArea: " << quadrilateral.calculateArea() << endl;
+            cout << "Perimeter: " << quadrilateral.calculatePerimeter() << endl;
+
+            cout << "---------------------------------------------\n";
+        }
+
+    private:
+        void calculateCircleProperties()
+        {
+            double radius;
+
+            cout << "Circle\n";
+            // Input the radius of the circle from the user
+            cout << "Enter the radius of the circle: ";
+            cin >> radius;
+
+            cout << "\n---------------------------------------------\n";
+
+            // Check if the radius is non-negative
+            if (radius >= 0)
+            {
+                Circle circle(radius);
+
+                // Calculate and display the properties of the circle
+                cout << "Circle Properties:\n\n";
+                cout << "Diameter: " << circle.getDiameter() << endl;
+                cout << "Area: " << circle.getArea() << endl;
+                cout << "Circumference: " << circle.getPerimeter() << endl;
             }
             else
             {
-                cout << "These side lengths cannot build a quadrilateral." << endl;
+                cout << "The radius of a circle cannot be negative." << endl;
             }
+
+            cout << "---------------------------------------------\n";
         }
     };
 }

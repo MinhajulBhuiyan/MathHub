@@ -73,23 +73,26 @@ namespace logarithm
                 cout << "Enter your choice (0/1/2): ";
                 cin >> choice;
 
+                system("clear");
+
                 if (choice == 0)
                 {
                     break; // Return to the previous menu
                 }
                 else if (choice >= 1 && choice <= 2)
                 {
-                    cout << "\nEnter the value: ";
-                    cin >> value;
 
                     switch (choice)
                     {
                     case 1:
                     {
+                        cout << "ln()" ;
+                        cout << "\nEnter the value: ";
+                        cin >> value;
                         double result = customNaturalLog(value);
                         if (isnan(result))
                         {
-                            cout << "Custom Natural logarithm is undefined for x <= 0." << endl;
+                            cout << "\nError !!!\nCustom Natural logarithm is undefined for x <= 0." << endl;
                         }
                         else
                         {
@@ -99,6 +102,9 @@ namespace logarithm
                     }
                     case 2:
                     {
+                        cout << "e^()" ;
+                        cout << "\nEnter the value: ";
+                        cin >> value;
                         double result = customExpFunction(value);
                         cout << "\n---------------------------------------------\ne^" << value << " = " << result << "\n---------------------------------------------" << endl;
                         break;
