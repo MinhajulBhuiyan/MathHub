@@ -508,14 +508,17 @@ namespace unit
 
             while (true)
             {
-                cout << "\n\nChoose a conversion type:\n\n";
+#ifdef _WIN32
+                system("cls");
+#endif
+                cout << "Choose a conversion type:\n\n";
                 cout << "1. Length Conversion\n";
                 cout << "2. Temperature Conversion\n";
                 cout << "3. Weight Conversion\n";
                 cout << "4. Speed Conversion\n";
                 cout << "5. Pressure Conversion\n";
                 cout << "0. Exit\n\n\n";
-                cout << "Enter your choice (0-5): ";
+                cout << "Enter your choice (0/1/2/3/4/5): ";
                 cin >> choice;
 
                 if (choice == 0)
@@ -544,6 +547,7 @@ namespace unit
                     cout << "Invalid choice. Please enter a valid option.\n\n\n";
                     break;
                 }
+
             }
         }
 
@@ -557,7 +561,7 @@ namespace unit
             double value;
             string sourceUnitStr, targetUnitStr;
 
-            cout << "Give input like this." << endl;
+            cout << "Input Format" << endl;
             cout << "'m', 'cm', 'km', 'in', 'ft', 'yd', 'mile', 'nmile'" << endl;
             cout << "\nEnter the source unit: ";
             cin >> sourceUnitStr;
@@ -597,6 +601,7 @@ namespace unit
             // Clear the screen (Unix-like systems)
             system("clear");
         }
+
         void performTemperatureConversions()
         {
 #ifdef _WIN32
@@ -606,7 +611,7 @@ namespace unit
             double value;
             string sourceUnitStr, targetUnitStr;
 
-            cout << "Give input like this." << endl;
+            cout << "Input Format" << endl;
             cout << "'c', 'f', 'k'" << endl;
             cout << "\nEnter the source unit: ";
             cin >> sourceUnitStr;
@@ -657,7 +662,7 @@ namespace unit
             double value;
             string sourceUnitStr, targetUnitStr;
 
-            cout << "Give input like this." << endl;
+            cout << "Input Format" << endl;
             cout << "'mg', 'g', 'kg', 'oz', 'lb'" << endl;
             cout << "\nEnter the source unit: ";
             cin >> sourceUnitStr;
@@ -707,7 +712,7 @@ namespace unit
             double value;
             string sourceUnitStr, targetUnitStr;
 
-            cout << "Give input like this." << endl;
+            cout << "Input Format" << endl;
             cout << "'mph', 'kmph', 'mps', 'knt'" << endl;
             cout << "\nEnter the source unit: ";
             cin >> sourceUnitStr;
@@ -756,7 +761,7 @@ namespace unit
             double value;
             string sourceUnitStr, targetUnitStr;
 
-            cout << "Give input like this." << endl;
+            cout << "Input Format" << endl;
             cout << "'pa', 'atm', 'bar', 'mmhg', 'psi'" << endl;
             cout << "\nEnter the source unit: ";
             cin >> sourceUnitStr;
@@ -781,7 +786,7 @@ namespace unit
                 PressureConversion converter(value, sourceUnit, targetUnit);
                 double result = converter.convert();
 
-                cout << value << " " << sourceUnitStr  << " = " << result << " " << targetUnitStr << endl;
+                cout << value << " " << sourceUnitStr << " = " << result << " " << targetUnitStr << endl;
             }
             else
             {

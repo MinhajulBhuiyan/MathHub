@@ -12,6 +12,7 @@ namespace MatrixLibrary
     // Function to print a matrix in the specified format
     void printMatrix(const vector<vector<double>> &matrix, const string &matrixName)
     {
+        cout << "---------------------------------------------";
         cout << matrixName << ":" << endl;
         for (const auto &row : matrix)
         {
@@ -21,6 +22,7 @@ namespace MatrixLibrary
             }
             cout << endl;
         }
+        cout << "---------------------------------------------\n\n";
     }
     class MatrixOperations
     {
@@ -219,9 +221,13 @@ namespace MatrixLibrary
                 cout << "3. Matrix Multiplication\n";
                 cout << "4. Matrix Inversion\n";
                 cout << "5. Calculate Determinant\n";
-                cout << "0. Exit\n\n";
+                cout << "0. Back to the previous menu\n\n";
                 cout << "Enter your choice (0/1/2/3/4/5): ";
                 cin >> operationChoice;
+
+                //cin.ignore();
+                //cin.get();
+                system("clear");
 
                 if (operationChoice == 0)
                 {
@@ -230,12 +236,12 @@ namespace MatrixLibrary
 
                 if (operationChoice < 1 || operationChoice > 5)
                 {
-                    cout << "\nInvalid choice for the matrix operation. Please enter 1, 2, 3, 4, or 5.\n\n";
+                    cout << "Invalid choice for the matrix operation. Please enter 1, 2, 3, 4, or 5.\n\n";
                     continue;
                 }
 
                 int dimension;
-                cout << "\nChoose the matrix dimension (2 for 2x2, 3 for 3x3): ";
+                cout << "Choose the matrix dimension (2 for 2x2, 3 for 3x3): ";
                 cin >> dimension;
 
                 if (dimension < 2 || dimension > 3)
@@ -248,10 +254,13 @@ namespace MatrixLibrary
 
                 vector<vector<double>> matrixA = inputMatrix(dimension, "Matrix A");
 
+
                 switch (operationChoice)
                 {
+
                 case 1:
                 {
+
                     vector<vector<double>> matrixB = inputMatrix(dimension, "Matrix B");
                     vector<vector<double>> resultAddition = MatrixOperations::matrixAddition(matrixA, matrixB);
                     printMatrix(resultAddition, "\nMatrix A + Matrix B");
@@ -290,7 +299,7 @@ namespace MatrixLibrary
                     vector<vector<double>> resultInversion = MatrixOperations::matrixInversion(matrixA);
                     if (!resultInversion.empty())
                     {
-                        printMatrix(resultInversion, "Inverse of Matrix A");
+                        printMatrix(resultInversion, "\nInverse of Matrix A");
                     }
                     break;
                 }
@@ -307,11 +316,12 @@ namespace MatrixLibrary
                     cout << "\nInvalid choice. Please enter a valid option.\n";
                     break;
                 }
+                cout << "Press Enter to continue...";
+                cin.ignore();
+                cin.get();
 
-                // Wait for the user to press Enter before proceeding
-                cout << "\nPress Enter to continue...";
-                cin.get(); // This line will read the Enter keypress
-                cin.get(); // This line will wait for an additional Enter keypress
+                // Clear the screen (Unix-like systems)
+                system("clear");
             }
         }
     };
