@@ -225,9 +225,9 @@ namespace MatrixLibrary
                 cout << "Enter your choice (0/1/2/3/4/5): ";
                 cin >> operationChoice;
 
-                //cin.ignore();
-                //cin.get();
-                system("clear");
+                // cin.ignore();
+                // cin.get();
+                system("cls");
 
                 if (operationChoice == 0)
                 {
@@ -253,7 +253,6 @@ namespace MatrixLibrary
                 cin.ignore(); // Consume the newline character after entering the dimension.
 
                 vector<vector<double>> matrixA = inputMatrix(dimension, "Matrix A");
-
 
                 switch (operationChoice)
                 {
@@ -308,7 +307,7 @@ namespace MatrixLibrary
                     double determinant = MatrixOperations::calculateDeterminant(matrixA);
                     if (!isnan(determinant))
                     {
-                        cout << "\nDeterminant of Matrix A: " << determinant << endl;
+                        cout << "\n---------------------------------------------\nDeterminant of Matrix A: " << determinant << "\n---------------------------------------------" << endl;
                     }
                     break;
                 }
@@ -316,12 +315,12 @@ namespace MatrixLibrary
                     cout << "\nInvalid choice. Please enter a valid option.\n";
                     break;
                 }
-                cout << "Press Enter to continue...";
+                cout << "\nPress Enter to continue...";
                 cin.ignore();
                 cin.get();
 
                 // Clear the screen (Unix-like systems)
-                system("clear");
+                system("cls");
             }
         }
     };

@@ -244,7 +244,7 @@ namespace quantitative
                 cout << "Enter your choice (0/1/2/3): ";
                 cin >> choice;
 
-                system("clear");
+                system("cls");
 
                 if (choice == 0)
                 {

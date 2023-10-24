@@ -599,7 +599,7 @@ namespace unit
             cin.get();
 
             // Clear the screen (Unix-like systems)
-            system("clear");
+            system("cls");
         }
 
         void performTemperatureConversions()
@@ -649,7 +649,7 @@ namespace unit
             cin.get();
 
             // Clear the screen (Unix-like systems)
-            system("clear");
+            system("cls");
         }
 
         void performWeightConversions()
@@ -700,7 +700,7 @@ namespace unit
             cin.get();
 
             // Clear the screen (Unix-like systems)
-            system("clear");
+            system("cls");
         }
 
         void performSpeedConversions()
@@ -750,7 +750,7 @@ namespace unit
             cin.get();
 
             // Clear the screen (Unix-like systems)
-            system("clear");
+            system("cls");
         }
         void performPressureConversions()
         {
@@ -800,7 +800,7 @@ namespace unit
             cin.get();
 
             // Clear the screen (Unix-like systems)
-            system("clear");
+            system("cls");
         }
     };
 }

@@ -158,7 +158,7 @@ namespace trigonometry
                 cout << "Enter your choice (0/1/2/3/4/5/6): ";
                 cin >> choice;
 
-                system("clear");
+                system("cls");
 
                 if (choice == 0)
                 {
@@ -169,17 +169,20 @@ namespace trigonometry
                     switch (choice)
                     {
                     case 1:
+
                     {
+                        cout << "sin()\nEnter the angle or value: ";
+                        cin >> angle;
                         double result = sinDegrees(angle);
                         if (abs(result) < 1e-15)
                         {
-                            cout << "sin()\nEnter the angle or value: ";
-                            cin >> angle;
+
                             result = 0.0;
                         }
                         cout << "\n---------------------------------------------\nsin(" << angle << ") = " << fixed << result << "\n---------------------------------------------" << endl;
                         break;
                     }
+
                     case 2:
                     {
                         cout << "cos()\nEnter the angle or value: ";
