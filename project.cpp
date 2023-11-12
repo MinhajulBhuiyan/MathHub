@@ -4,6 +4,7 @@
 #include "matrixManipulation.h"
 #include "quantitative.h"
 #include "Logarithm.h"
+#include "Arithmetic.h"
 
 using namespace std;
 using namespace unit;
@@ -11,6 +12,7 @@ using namespace trigonometry;
 using namespace MatrixLibrary;
 using namespace quantitative;
 using namespace logarithm;
+using namespace arithmetic;
 
 int main()
 {
@@ -22,8 +24,8 @@ int main()
             system("cls");
         #endif
 
-        cout << "Choose a library\n\n1. Trigonometry\n2. Unit conversion\n3. Matrix Manipulation\n4. Quantitative Operation\n5. Logarithmic Functions\n0. Exit\n";
-        cout << "\nPlease enter [ 1/2/3/4/0 ]: ";
+        cout << "Choose a library\n\n1. Trigonometry\n2. Unit conversion\n3. Matrix Manipulation\n4. Quantitative Operation\n5. Logarithmic Functions\n6. Calculator\n0. Exit\n";
+        cout << "\nPlease enter [ 1/2/3/4/5/6/0 ]: ";
         getline(cin, libraryChoice);
 
         if (libraryChoice == "0")
@@ -59,10 +61,14 @@ int main()
             Logarithm logarithm;
             logarithm.performLogarithms();
         }
-
+        else if (libraryChoice == "6")
+        {
+            CalculatorManager calculatorManager;
+            calculatorManager.performCalculation();
+        }
         else
         {
-            cout << "Invalid library choice. Please enter [ 1/2/3/4/0 ]" << endl;
+            cout << "Invalid library choice. Please enter [ 1/2/3/4/5/6/0 ]" << endl;
         }
         
     }

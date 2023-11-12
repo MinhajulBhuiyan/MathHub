@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/spl mathhub",
-      "program": "d:/spl mathhub/build/Debug/outDebug",
+      "cwd": "c:/Users/bhuiy/Desktop/SPL",
+      "program": "c:/Users/bhuiy/Desktop/SPL/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
