@@ -1306,3 +1306,879 @@ namespace physics
             cin >> radius;
             cout << "Enter angular velocity(rad/s): ";
             cin >> angularVelocity;
+            
+
+            double tangentialVelocity = formulas.calculateTangentialVelocity(radius, angularVelocity);
+
+            cout << "Calculated tangential velocity: " << tangentialVelocity << " m/s\n";
+        }
+
+        void performAngularVelocityCalculations()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double tangentialVelocity, radius;
+            cout << "Enter tangential velocity(m/s): ";
+            cin >> tangentialVelocity;
+            cout << "Enter radius(m): ";
+            cin >> radius;
+
+            double angularVelocity = formulas.calculateAngularVelocity(tangentialVelocity, radius);
+
+            cout << "Calculated angular velocity: " << angularVelocity << " rad/s\n";
+        }
+
+        void performElectricityMagnetismCalculations()
+        {
+            while (true)
+            {
+#ifdef _WIN32
+                system("cls");
+#endif
+                int electricityMagnetismChoice;
+
+                cout << "Choose Electricity and Magnetism Formula:\n\n";
+                cout << "1. Ohm's Law\n";
+                cout << "2. Electric Power\n";
+                cout << "3. Magnetic Force\n";
+                cout << "4. Magnetic Field\n";
+                cout << "0. Back to the previous menu\n\n";
+                cout << "Enter your choice (0-4): ";
+                cin >> electricityMagnetismChoice;
+
+                if (electricityMagnetismChoice == 0)
+                {
+                    break; // Return to the previous menu
+                }
+                else if (electricityMagnetismChoice >= 1 && electricityMagnetismChoice <= 4)
+                {
+                    switch (electricityMagnetismChoice)
+                    {
+                    case 1:
+                        performOhmsLawCalculations();
+                        break;
+                    case 2:
+                        performElectricPowerCalculations();
+                        break;
+                    case 3:
+                        performMagneticForceCalculations();
+                        break;
+                    case 4:
+                        performMagneticFieldCalculations();
+                        break;
+                    }
+
+                    cout << "\nPress Enter to continue...";
+                    cin.get();    // This line will read the Enter keypress
+                    cin.ignore(); // Clear the newline character from the buffer
+                }
+                else
+                {
+                    cout << "\nInvalid choice. Please enter a number between 0 and 4.\n";
+                }
+            }
+        }
+
+        void performOhmsLawCalculations()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double voltage, current, resistance;
+            cout << "Enter voltage(V): ";
+            cin >> voltage;
+            cout << "Enter current(Amp): ";
+            cin >> current;
+
+            double calculatedResistance = formulas.calculateResistance(voltage, current);
+
+            cout << "Calculated resistance: " << calculatedResistance << " Ohm\n";
+        }
+
+        void performElectricPowerCalculations()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double voltage, current;
+            cout << "Enter voltage(V): ";
+            cin >> voltage;
+            cout << "Enter current(Amp): ";
+            cin >> current;
+
+            double electricPower = formulas.calculateElectricPower(voltage, current);
+
+            cout << "Calculated electric power: " << electricPower << " Watt\n";
+        }
+
+        void performMagneticForceCalculations()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double charge, magneticField, velocity;
+            cout << "Enter charge(C): ";
+            cin >> charge;
+            cout << "Enter magnetic field(Tesla): ";
+            cin >> magneticField;
+            cout << "Enter velocity(m/s): ";
+            cin >> velocity;
+
+            double magneticForce = formulas.calculateMagneticForce(charge, velocity, magneticField);
+
+            cout << "Calculated magnetic force: " << magneticForce << " N\n";
+        }
+
+        void performMagneticFieldCalculations()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double magneticForce, charge, velocity;
+            cout << "Enter magnetic force(N): ";
+            cin >> magneticForce;
+            cout << "Enter charge(C): ";
+            cin >> charge;
+            cout << "Enter velocity(m/s): ";
+            cin >> velocity;
+
+            double magneticField = formulas.calculateMagneticField(magneticForce, charge, velocity);
+
+            cout << "Calculated magnetic field: " << magneticField << " Tesla\n";
+        }
+
+        void performOpticsCalculations()
+        {
+            while (true)
+            {
+#ifdef _WIN32
+                system("cls");
+#endif
+                int opticsChoice;
+
+                cout << "Choose Optics Formula:\n\n";
+                cout << "1. Snell's Law\n";
+                cout << "2. Lens Maker's Equation\n";
+                cout << "3. Magnification\n";
+                cout << "4. Lens Power\n";
+                cout << "0. Back to the previous menu\n\n";
+                cout << "Enter your choice (0-4): ";
+                cin >> opticsChoice;
+
+                if (opticsChoice == 0)
+                {
+                    break; // Return to the previous menu
+                }
+                else if (opticsChoice >= 1 && opticsChoice <= 4)
+                {
+                    switch (opticsChoice)
+                    {
+                    case 1:
+                        performSnellsLawCalculations();
+                        break;
+                    case 2:
+                        performLensMakersEquationCalculations();
+                        break;
+                    case 3:
+                        performMagnificationCalculations();
+                        break;
+                    case 4:
+                        performLensPowerCalculations();
+                        break;
+                    }
+
+                    cout << "\nPress Enter to continue...";
+                    cin.get();    // This line will read the Enter keypress
+                    cin.ignore(); // Clear the newline character from the buffer
+                }
+                else
+                {
+                    cout << "\nInvalid choice. Please enter a number between 0 and 4.\n";
+                }
+            }
+        }
+
+        void performSnellsLawCalculations()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double incidentAngle, refractiveIndex1, refractiveIndex2;
+            cout << "Enter incident angle (in degrees): ";
+            cin >> incidentAngle;
+            cout << "Enter refractive index of medium 1: ";
+            cin >> refractiveIndex1;
+            cout << "Enter refractive index of medium 2: ";
+            cin >> refractiveIndex2;
+
+            double refractedAngle = formulas.calculateSnellsLaw(incidentAngle, refractiveIndex1, refractiveIndex2);
+
+            cout << "Calculated refracted angle: " << refractedAngle << " degrees\n";
+        }
+
+        void performLensMakersEquationCalculations()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double radiusOfCurvature, refractiveIndex;
+            cout << "Enter radius of curvature(m): ";
+            cin >> radiusOfCurvature;
+            cout << "Enter refractive index: ";
+            cin >> refractiveIndex;
+
+            double focalLength = formulas.calculateLensMakersEquation(radiusOfCurvature, refractiveIndex);
+
+            cout << "Calculated focal length: " << focalLength << " m\n";
+        }
+
+        void performMagnificationCalculations()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double objectHeight, imageHeight;
+            cout << "Enter object height(m): ";
+            cin >> objectHeight;
+            cout << "Enter image height(m): ";
+            cin >> imageHeight;
+
+            double magnification = formulas.calculateMagnification(objectHeight, imageHeight);
+
+            cout << "Calculated magnification: " << magnification << "\n";
+        }
+
+        void performLensPowerCalculations()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double focalLength;
+            cout << "Enter focal length: ";
+            cin >> focalLength;
+
+            double lensPower = formulas.calculateLensPower(focalLength);
+
+            cout << "Calculated lens power: " << lensPower << "\n";
+        }
+
+        void performAtomicPhysicsCalculations()
+        {
+            while (true)
+            {
+#ifdef _WIN32
+                system("cls");
+#endif
+                int atomicChoice;
+
+                cout << "Choose Atomic Physics Formula:\n\n";
+                cout << "1. Calculate Energy Levels\n";
+                cout << "2. Calculate Wavelength from Energy\n";
+                cout << "0. Back to the previous menu\n\n";
+                cout << "Enter your choice (0-2): ";
+                cin >> atomicChoice;
+
+                if (atomicChoice == 0)
+                {
+                    break; // Return to the previous menu
+                }
+                else if (atomicChoice >= 1 && atomicChoice <= 2)
+                {
+                    switch (atomicChoice)
+                    {
+                    case 1:
+                        calculateEnergyLevels();
+                        break;
+                    case 2:
+                        calculateWavelengthFromEnergy();
+                        break;
+                    }
+
+                    cout << "\nPress Enter to continue...";
+                    cin.ignore(); // Clear the newline character from the buffer
+                    cin.get();    // This line will wait for an additional Enter keypress
+                }
+                else
+                {
+                    cout << "\nInvalid choice. Please enter a number between 0 and 2.\n";
+                }
+            }
+        }
+
+        void calculateEnergyLevels()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double quantumNumber;
+
+            cout << "Enter quantum number: ";
+            cin >> quantumNumber;
+
+            double energy = formulas.calculateEnergyLevel(quantumNumber);
+
+            cout << "Calculated energy level: " << energy << " Joule\n";
+        }
+
+        void calculateWavelengthFromEnergy()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double energy;
+
+            cout << "Enter energy(J): ";
+            cin >> energy;
+
+            double wavelength = formulas.calculateWavelengthFromEnergy(energy);
+
+            cout << "Calculated wavelength: " << wavelength << " m\n";
+        }
+
+        void performGravitationCalculations()
+        {
+            while (true)
+            {
+#ifdef _WIN32
+                system("cls");
+#endif
+                int gravitationChoice;
+
+                cout << "Choose Gravitation Formula:\n\n";
+                cout << "1. Calculate Gravitational Force\n";
+                cout << "2. Calculate Gravitational Potential Energy\n";
+                cout << "0. Back to the previous menu\n\n";
+                cout << "Enter your choice (0-2): ";
+                cin >> gravitationChoice;
+
+                if (gravitationChoice == 0)
+                {
+                    break; // Return to the previous menu
+                }
+                else if (gravitationChoice >= 1 && gravitationChoice <= 2)
+                {
+                    switch (gravitationChoice)
+                    {
+                    case 1:
+                        calculateGravitationalForce();
+                        break;
+                    case 2:
+                        calculateGravitationalPotentialEnergy();
+                        break;
+                    }
+
+                    cout << "\nPress Enter to continue...";
+                    cin.ignore(); // Clear the newline character from the buffer
+                    cin.get();    // This line will wait for an additional Enter keypress
+                }
+                else
+                {
+                    cout << "\nInvalid choice. Please enter a number between 0 and 2.\n";
+                }
+            }
+        }
+
+        void calculateGravitationalForce()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double mass1, mass2, distance;
+
+            cout << "Enter mass of object 1(kg): ";
+            cin >> mass1;
+            cout << "Enter mass of object 2(kg): ";
+            cin >> mass2;
+            cout << "Enter distance between the objects(m): ";
+            cin >> distance;
+
+            double gravitationalForce = formulas.calculateGravitationalForce(mass1, mass2, distance);
+
+            cout << "Calculated gravitational force: " << gravitationalForce << " N\n";
+        }
+
+        void calculateGravitationalPotentialEnergy()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double mass1, mass2, distance;
+
+            cout << "Enter mass of object 1(kg): ";
+            cin >> mass1;
+            cout << "Enter mass of object 2(kg): ";
+            cin >> mass2;
+            cout << "Enter distance between the objects(m): ";
+            cin >> distance;
+
+            double gravitationalPotentialEnergy = formulas.calculateGravitationalPotentialEnergy(mass1, mass2, distance);
+
+            cout << "Calculated gravitational potential energy: " << gravitationalPotentialEnergy << " Joule\n";
+        }
+
+        void performNuclearPhysicsCalculations()
+        {
+            while (true)
+            {
+#ifdef _WIN32
+                system("cls");
+#endif
+                int nuclearChoice;
+
+                cout << "Choose Nuclear Physics Formula:\n\n";
+                cout << "1. Calculate Nuclear Binding Energy\n";
+                cout << "2. Calculate Decay Constant\n";
+                cout << "0. Back to the previous menu\n\n";
+                cout << "Enter your choice (0-2): ";
+                cin >> nuclearChoice;
+
+                if (nuclearChoice == 0)
+                {
+                    break; // Return to the previous menu
+                }
+                else if (nuclearChoice >= 1 && nuclearChoice <= 2)
+                {
+                    switch (nuclearChoice)
+                    {
+                    case 1:
+                        calculateNuclearBindingEnergy();
+                        break;
+                    case 2:
+                        calculateDecayConstant();
+                        break;
+                    }
+
+                    cout << "\nPress Enter to continue...";
+                    cin.ignore(); // Clear the newline character from the buffer
+                    cin.get();    // This line will wait for an additional Enter keypress
+                }
+                else
+                {
+                    cout << "\nInvalid choice. Please enter a number between 0 and 2.\n";
+                }
+            }
+        }
+
+        void calculateNuclearBindingEnergy()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double massDeficiency;
+
+            cout << "Enter mass deficiency(a.m.u.): ";
+            cin >> massDeficiency;
+
+            double bindingEnergy = formulas.calculateNuclearBindingEnergy(massDeficiency);
+
+            cout << "Calculated nuclear binding energy: " << bindingEnergy << " (a.m.u.)\n";
+        }
+
+        void calculateDecayConstant()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double halfLife;
+
+            cout << "Enter half-life: ";
+            cin >> halfLife;
+
+            double decayConstant = formulas.calculateDecayConstant(halfLife);
+
+            cout << "Calculated decay constant: " << decayConstant << "\n";
+        }
+
+        void performSpecialRelativityCalculations()
+        {
+            while (true)
+            {
+#ifdef _WIN32
+                system("cls");
+#endif
+                int relativityChoice;
+
+                cout << "Choose Special Relativity Formula:\n\n";
+                cout << "1. Calculate Time Dilation\n";
+                cout << "2. Calculate Length Contraction\n";
+                cout << "0. Back to the previous menu\n\n";
+                cout << "Enter your choice (0-2): ";
+                cin >> relativityChoice;
+
+                if (relativityChoice == 0)
+                {
+                    break; // Return to the previous menu
+                }
+                else if (relativityChoice >= 1 && relativityChoice <= 2)
+                {
+                    switch (relativityChoice)
+                    {
+                    case 1:
+                        calculateTimeDilation();
+                        break;
+                    case 2:
+                        calculateLengthContraction();
+                        break;
+                    }
+
+                    cout << "\nPress Enter to continue...";
+                    cin.ignore(); // Clear the newline character from the buffer
+                    cin.get();    // This line will wait for an additional Enter keypress
+                }
+                else
+                {
+                    cout << "\nInvalid choice. Please enter a number between 0 and 2.\n";
+                }
+            }
+        }
+
+        void calculateTimeDilation()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double relativisticTime, properTime, relativeVelocity;
+
+            cout << "Enter proper time (in seconds): ";
+            cin >> properTime;
+            cout << "Enter relative velocity (as a fraction of the speed of light): ";
+            cin >> relativeVelocity;
+
+            relativisticTime = formulas.calculateTimeDilation(properTime, relativeVelocity);
+
+            cout << "Calculated relativistic time: " << relativisticTime << " seconds\n";
+        }
+
+        void calculateLengthContraction()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double properLength, relativeVelocity;
+
+            cout << "Enter proper length(m): ";
+            cin >> properLength;
+            cout << "Enter relative velocity (as a fraction of the speed of light): ";
+            cin >> relativeVelocity;
+
+            double contractedLength = formulas.calculateLengthContraction(properLength, relativeVelocity);
+
+            cout << "Calculated contracted length: " << contractedLength << " m\n";
+        }
+
+        void performQuantumMechanicsCalculations()
+        {
+            while (true)
+            {
+#ifdef _WIN32
+                system("cls");
+#endif
+                int quantumChoice;
+
+                cout << "Choose Quantum Mechanics Formula:\n\n";
+                cout << "1. Calculate Particle Energy\n";
+                cout << "2. Calculate De Broglie Wavelength\n";
+                cout << "0. Back to the previous menu\n\n";
+                cout << "Enter your choice (0-2): ";
+                cin >> quantumChoice;
+
+                if (quantumChoice == 0)
+                {
+                    break; // Return to the previous menu
+                }
+                else if (quantumChoice >= 1 && quantumChoice <= 2)
+                {
+                    switch (quantumChoice)
+                    {
+                    case 1:
+                        performcalculateParticleEnergy();
+                        break;
+                    case 2:
+                        calculateDeBroglieWavelength();
+                        break;
+                    }
+
+                    cout << "\nPress Enter to continue...";
+                    cin.ignore(); // Clear the newline character from the buffer
+                    cin.get();    // This line will wait for an additional Enter keypress
+                }
+                else
+                {
+                    cout << "\nInvalid choice. Please enter a number between 0 and 2.\n";
+                }
+            }
+        }
+
+        void performcalculateParticleEnergy()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double mass, velocity;
+
+            cout << "Enter mass of the particle (kg): ";
+            cin >> mass;
+
+            cout << "Enter velocity of the particle (m/s): ";
+            cin >> velocity;
+
+            double energy = formulas.calculateParticleEnergy(mass, velocity);
+
+            cout << "Calculated particle energy: " << energy << " Joules\n";
+        }
+
+        void calculateDeBroglieWavelength()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double momentum;
+
+            cout << "Enter momentum of the particle (kg*m/s): ";
+            cin >> momentum;
+
+            double wavelength = formulas.calculateDeBroglieWavelength(momentum);
+
+            cout << "Calculated De Broglie wavelength: " << wavelength << " meters\n";
+        }
+
+        void performAstrophysicsCalculations()
+        {
+            while (true)
+            {
+#ifdef _WIN32
+                system("cls");
+#endif
+                int astrophysicsChoice;
+
+                cout << "Choose Astrophysics Formula:\n\n";
+                cout << "1. Calculate Escape Velocity\n";
+                cout << "2. Calculate Black Hole Temperature\n";
+                cout << "0. Back to the previous menu\n\n";
+                cout << "Enter your choice (0-2): ";
+                cin >> astrophysicsChoice;
+
+                if (astrophysicsChoice == 0)
+                {
+                    break; // Return to the previous menu
+                }
+                else if (astrophysicsChoice >= 1 && astrophysicsChoice <= 2)
+                {
+                    switch (astrophysicsChoice)
+                    {
+                    case 1:
+                        performcalculateEscapeVelocity();
+                        break;
+                    case 2:
+                        calculateBlackHoleTemperature();
+                        break;
+                    }
+
+                    cout << "\nPress Enter to continue...";
+                    cin.ignore(); // Clear the newline character from the buffer
+                    cin.get();    // This line will wait for an additional Enter keypress
+                }
+                else
+                {
+                    cout << "\nInvalid choice. Please enter a number between 0 and 2.\n";
+                }
+            }
+        }
+
+        void performcalculateEscapeVelocity()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double gravitationalAcceleration, radius;
+
+            cout << "Enter gravitational acceleration(m/s2): ";
+            cin >> gravitationalAcceleration;
+            cout << "Enter radius(m): ";
+            cin >> radius;
+
+            double escapeVelocity = formulas.calculateEscapeVelocity(gravitationalAcceleration, radius);
+
+            cout << "Calculated escape velocity: " << escapeVelocity << " m/s\n";
+        }
+
+        void calculateBlackHoleTemperature()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double blackHoleMass;
+
+            cout << "Enter mass of the black hole (kg): ";
+            cin >> blackHoleMass;
+
+            double temperature = formulas.calculateBlackHoleTemperature(blackHoleMass);
+
+            cout << "Calculated black hole temperature: " << temperature << " Kelvin\n";
+        }
+
+        void performFluidMechanicsCalculations()
+        {
+            while (true)
+            {
+#ifdef _WIN32
+                system("cls");
+#endif
+                int fluidMechanicsChoice;
+
+                cout << "Choose Fluid Mechanics Formula:\n\n";
+                cout << "1. Calculate Fluid Pressure\n";
+                cout << "2. Calculate Buoyant Force\n";
+                cout << "0. Back to the previous menu\n\n";
+                cout << "Enter your choice (0-2): ";
+                cin >> fluidMechanicsChoice;
+
+                if (fluidMechanicsChoice == 0)
+                {
+                    break; // Return to the previous menu
+                }
+                else if (fluidMechanicsChoice >= 1 && fluidMechanicsChoice <= 2)
+                {
+                    switch (fluidMechanicsChoice)
+                    {
+                    case 1:
+                        performcalculateFluidPressure();
+                        break;
+                    case 2:
+                        performcalculateBuoyantForce();
+                        break;
+                    }
+
+                    cout << "\nPress Enter to continue...";
+                    cin.ignore(); // Clear the newline character from the buffer
+                    cin.get();    // This line will wait for an additional Enter keypress
+                }
+                else
+                {
+                    cout << "\nInvalid choice. Please enter a number between 0 and 2.\n";
+                }
+            }
+        }
+
+        void performcalculateFluidPressure()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double density, gravity, height;
+
+            cout << "Enter fluid density (kg/m^3): ";
+            cin >> density;
+
+            cout << "Enter gravitational acceleration (m/s^2): ";
+            cin >> gravity;
+
+            cout << "Enter height of the fluid column (m): ";
+            cin >> height;
+
+            double fluidPressure = formulas.calculateFluidPressure(density, gravity, height);
+
+            cout << "Calculated fluid pressure: " << fluidPressure << " Pa\n";
+        }
+
+        void performcalculateBuoyantForce()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+            double fluidDensity, objectVolume, gravity;
+
+            cout << "Enter fluid density (kg/m^3): ";
+            cin >> fluidDensity;
+
+            cout << "Enter object volume (m^3): ";
+            cin >> objectVolume;
+
+            cout << "Enter gravitational acceleration(m/s2): ";
+            cin >> gravity;
+
+            double buoyantForce = formulas.calculateBuoyantForce(fluidDensity, objectVolume, gravity);
+
+            cout << "Calculated buoyant force: " << buoyantForce << " N\n";
+        }
+
+        void performStatisticalMechanicsCalculations()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+
+            int statisticalChoice;
+
+            cout << "Choose Statistical Mechanics Calculation:\n\n";
+            cout << "1. Calculate Boltzmann Entropy\n";
+            cout << "2. Calculate Maxwell-Boltzmann Distribution\n";
+            cout << "0. Back to the previous menu\n\n";
+            cout << "Enter your choice (0-2): ";
+            cin >> statisticalChoice;
+
+            if (statisticalChoice == 0)
+            {
+                return; // Return to the previous menu
+            }
+            else if (statisticalChoice >= 1 && statisticalChoice <= 2)
+            {
+                switch (statisticalChoice)
+                {
+                case 1:
+                    performCalculateBoltzmannEntropy();
+                    break;
+
+                case 2:
+                    performCalculateMaxwellBoltzmannDistribution();
+                    break;
+                }
+
+                cout << "\nPress Enter to continue...";
+                cin.ignore(); // Clear the newline character from the buffer
+                cin.get();    // This line will wait for an additional Enter keypress
+            }
+            else
+            {
+                cout << "\nInvalid choice. Please enter a number between 0 and 2.\n";
+            }
+        }
+
+        void performCalculateBoltzmannEntropy()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+
+            double probability;
+            cout << "Enter probability: ";
+            cin >> probability;
+
+            double entropy = formulas.calculateBoltzmannEntropy(probability);
+
+            cout << "Calculated Boltzmann Entropy: " << entropy << "\n";
+        }
+
+        void performCalculateMaxwellBoltzmannDistribution()
+        {
+#ifdef _WIN32
+            system("cls");
+#endif
+
+            double mass, temperature, speed;
+            cout << "Enter mass: ";
+            cin >> mass;
+            cout << "Enter temperature: ";
+            cin >> temperature;
+            cout << "Enter speed: ";
+            cin >> speed;
+
+            double distribution = formulas.calculateMaxwellBoltzmannDistribution(mass, temperature, speed);
+
+            cout << "Calculated Maxwell-Boltzmann Distribution: " << distribution << "\n";
+        }
+    };
+}
+
+#endif

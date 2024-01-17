@@ -4,7 +4,8 @@
 #include "matrixManipulation.h"
 #include "quantitative.h"
 #include "Logarithm.h"
-#include "Statistics.h" // Include the Statistics Library header
+#include "Statistics.h" 
+#include "physics_formula.h"
 
 using namespace std;
 using namespace unit;
@@ -12,7 +13,8 @@ using namespace trigonometry;
 using namespace MatrixLibrary;
 using namespace quantitative;
 using namespace logarithm;
-using namespace StatisticsLibrary; // Add the namespace for Statistics Library
+using namespace StatisticsLibrary; 
+using namespace physics;
 
 int main()
 {
@@ -24,33 +26,38 @@ int main()
         system("cls");
 #endif
 
-        cout << "Choose a library\n\n1. Trigonometry\n2. Unit conversion\n3. Matrix Manipulation\n4. Quantitative Operation\n5. Logarithmic Functions\n6. Statistics\n0. Exit\n";
-        cout << "\nPlease enter [ 1/2/3/4/5/6/0 ]: ";
+        cout << "Choose a library:\n"
+                "1. Trigonometry\n"
+                "2. Unit conversion\n"
+                "3. Matrix Manipulation\n"
+                "4. Quantitative Operation\n"
+                "5. Logarithmic Functions\n"
+                "6. Statistics\n"
+                "7. Physics Formula\n"
+                "0. Exit\n";
+        cout << "\nEnter the corresponding number (or 0 to Exit): ";
+
         getline(cin, libraryChoice);
 
         if (libraryChoice == "0")
         {
             break;
         }
-
         else if (libraryChoice == "1")
         {
             Trigonometry trigonometry;
             trigonometry.performTrigonometry();
         }
-
         else if (libraryChoice == "2")
         {
             ConversionManager conversionManager;
             conversionManager.performConversions();
         }
-
         else if (libraryChoice == "3")
         {
             MatrixManager matrix;
             matrix.performMatrixOperation();
         }
-
         else if (libraryChoice == "4")
         {
             QuantitativeManager quantitativeManager;
@@ -63,13 +70,17 @@ int main()
         }
         else if (libraryChoice == "6")
         {
-            StatisticsManager statisticsManager; // Create an instance of StatisticsManager
-            statisticsManager.performStatistics(); // Call the performStatistics function
+            StatisticsManager statisticsManager;
+            statisticsManager.performStatistics();
         }
-
+        else if (libraryChoice == "7")
+        {
+            PhysicsFormulasManager physicsFormulasManager;
+            physicsFormulasManager.performPhysicsCalculations();
+        }
         else
         {
-            cout << "Invalid library choice. Please enter [ 1/2/3/4/5/6/0 ]" << endl;
+            cout << "Invalid library choice. Please enter a valid number (or 0 to Exit).\n";
         }
     }
 
